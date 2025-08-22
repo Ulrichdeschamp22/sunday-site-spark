@@ -1,72 +1,116 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Clock, Star, Shield, Wifi, Car, Coffee, Users, Plane, Heart } from "lucide-react";
 
 const FAQ = () => {
   const faqs = [
     {
-      question: "Comment réserver une chambre à l'Hôtel Résidence Sunday ?",
-      answer: "Vous pouvez réserver directement en nous contactant via WhatsApp au +225 07 69 69 21 94 ou en utilisant le bouton 'Réserver maintenant' sur notre site. Notre équipe est disponible 24h/24 pour vous assister."
+      icon: <Heart className="h-5 w-5 text-gold" />,
+      question: "Pourquoi choisir l'Hôtel Résidence Sunday ?",
+      answer: "✨ Découvrez l'excellence à la Baie des Milliardaires ! Un cadre exceptionnel, un service 5 étoiles disponible 24h/24, et une expérience inoubliable qui fera de votre séjour un moment magique.",
+      badge: "Expérience Premium"
     },
     {
-      question: "Quels sont les tarifs des chambres ?",
-      answer: "Nos tarifs varient selon le type de chambre (standard, double, suite) et la période. Contactez-nous directement pour obtenir les meilleurs prix et offres spéciales. Nous garantissons un excellent rapport qualité/prix."
+      icon: <MapPin className="h-5 w-5 text-gold" />,
+      question: "Où nous trouver dans ce petit paradis d'Abidjan ?",
+      answer: "🏝️ Au cœur de la prestigieuse Baie des Milliardaires à Yopougon ! Un emplacement de rêve où l'élégance rencontre la tranquillité, facilement accessible et proche de tout ce qui compte.",
+      badge: "Localisation Premium"
     },
     {
-      question: "Où se situe exactement l'hôtel ?",
-      answer: "Nous sommes situés à Abidjan, dans le quartier Yopougon, précisément à la Baie des Milliardaires. C'est un cadre paisible et élégant, facilement accessible."
+      icon: <Star className="h-5 w-5 text-gold" />,
+      question: "Comment réserver votre escapade de rêve ?",
+      answer: "📱 Simple comme bonjour ! Un clic sur WhatsApp (+225 07 69 69 21 94) ou notre bouton 'Réserver maintenant'. Notre équipe passionnée est là 24h/24 pour transformer votre réservation en expérience extraordinaire !",
+      badge: "Réservation Instantanée"
     },
     {
-      question: "Quels services sont inclus dans le séjour ?",
-      answer: "Tous nos séjours incluent : WiFi gratuit, climatisation, télévision, accès au restaurant et bar, parking sécurisé, et notre service client disponible 24h/24 et 7j/7."
+      icon: <Coffee className="h-5 w-5 text-gold" />,
+      question: "Une gastronomie qui éveille vos sens ?",
+      answer: "🍽️ Absolument ! Notre restaurant vous propose un véritable voyage culinaire avec des spécialités ivoiriennes et internationales. Nos clients en parlent comme d'une 'expérience gastronomique validée' !",
+      badge: "Gastronomie d'Exception"
     },
     {
-      question: "L'hôtel dispose-t-il d'un restaurant ?",
-      answer: "Oui ! Nous proposons une gastronomie validée par nos clients avec des plats savoureux. Notre restaurant est ouvert et notre cuisine est très appréciée par notre clientèle."
+      icon: <Shield className="h-5 w-5 text-gold" />,
+      question: "Quels services premium vous attendent ?",
+      answer: "🌟 WiFi gratuit ultra-rapide, climatisation parfaite, télévision HD, restaurant gastronomique, bar chaleureux, parking ultra-sécurisé, et notre équipe dédiée 24h/24 pour anticiper vos moindres désirs !",
+      badge: "Services 5 Étoiles"
     },
     {
-      question: "Y a-t-il un parking disponible ?",
-      answer: "Oui, nous disposons d'un parking sécurisé pour nos clients. Votre véhicule sera en sécurité pendant tout votre séjour."
+      icon: <Clock className="h-5 w-5 text-gold" />,
+      question: "Toujours là pour vous, vraiment ?",
+      answer: "⏰ 24h/24 et 7j/7 ! Parce que l'excellence ne connaît pas d'horaires. Notre équipe passionnée est toujours présente pour faire de chaque moment un souvenir précieux.",
+      badge: "Service Continu"
     },
     {
-      question: "L'hôtel est-il ouvert 24h/24 ?",
-      answer: "Absolument ! L'Hôtel Résidence Sunday vous accueille 24h/24 et 7j/7. Notre équipe est toujours présente pour vous offrir le meilleur service."
+      icon: <Users className="h-5 w-5 text-gold" />,
+      question: "Parfait pour les professionnels en mission ?",
+      answer: "💼 Transformez vos déplacements professionnels en moments privilégiés ! Notre cadre paisible et nos services premium créent l'environnement parfait pour allier travail et bien-être.",
+      badge: "Business Premium"
     },
     {
-      question: "Proposez-vous des séjours pour les professionnels ?",
-      answer: "Oui, notre cadre paisible et nos services sont parfaitement adaptés aux séjours professionnels. Nous offrons un environnement propice au travail et à la détente."
+      icon: <Car className="h-5 w-5 text-gold" />,
+      question: "Votre véhicule en sécurité absolue ?",
+      answer: "🚗 Parking privé ultra-sécurisé ! Votre tranquillité d'esprit commence dès votre arrivée. Concentrez-vous sur votre détente, nous nous occupons du reste.",
+      badge: "Sécurité Maximale"
     },
     {
-      question: "Comment se rendre à l'hôtel depuis l'aéroport ?",
-      answer: "Depuis l'aéroport d'Abidjan, vous pouvez prendre un taxi ou nous contacter pour organiser votre transfert. Nous sommes situés à Yopougon, à la Baie des Milliardaires."
+      icon: <Plane className="h-5 w-5 text-gold" />,
+      question: "Comment rejoindre facilement notre havre de paix ?",
+      answer: "✈️ Depuis l'aéroport, laissez-nous organiser votre transfert VIP ou prenez un taxi direction Yopougon-Baie des Milliardaires. Le voyage vers l'exception commence dès votre atterrissage !",
+      badge: "Accès Privilégié"
     },
     {
-      question: "Acceptez-vous les groupes et événements ?",
-      answer: "Oui, nous accueillons les groupes et pouvons organiser des événements dans notre cadre chaleureux et élégant. Contactez-nous pour discuter de vos besoins spécifiques."
+      icon: <Heart className="h-5 w-5 text-gold" />,
+      question: "Des événements et groupes exceptionnels ?",
+      answer: "🎉 Créons ensemble des moments inoubliables ! Que ce soit pour des événements intimes ou des groupes, notre cadre enchanteur et notre équipe experte transformeront vos projets en souvenirs magiques.",
+      badge: "Événements Sur-Mesure"
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-secondary to-background">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-b from-secondary via-background to-secondary/50 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNGRkQ3MDAiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50"></div>
+      
+      <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-navy to-gold bg-clip-text text-transparent">
-            Questions Fréquentes
+          <Badge variant="outline" className="mb-6 px-6 py-2 text-gold border-gold/30 bg-gold/5">
+            ✨ Tout ce que vous voulez savoir
+          </Badge>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-navy via-gold to-navy bg-clip-text text-transparent">
+            Vos Questions, Nos Réponses
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Trouvez rapidement les réponses aux questions les plus courantes sur l'Hôtel Résidence Sunday
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Découvrez pourquoi l'Hôtel Résidence Sunday est le choix privilégié des voyageurs exigeants à Abidjan
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="border-none shadow-elegant p-6">
-            <Accordion type="single" collapsible className="w-full">
+        <div className="max-w-5xl mx-auto">
+          <Card className="border-none shadow-[0_20px_60px_-15px_rgba(255,215,0,0.2)] bg-card/80 backdrop-blur-sm p-8">
+            <Accordion type="single" collapsible className="w-full space-y-4">
               {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-gold/20">
-                  <AccordionTrigger className="text-left text-navy hover:text-gold transition-colors">
-                    <span className="font-semibold">{faq.question}</span>
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`} 
+                  className="border border-gold/10 rounded-xl px-6 py-2 bg-gradient-to-r from-background/50 to-secondary/30 hover:from-gold/5 hover:to-gold/10 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  <AccordionTrigger className="text-left text-navy hover:text-gold transition-all duration-300 py-6 [&[data-state=open]]:text-gold">
+                    <div className="flex items-center gap-4">
+                      <div className="flex-shrink-0 p-2 rounded-full bg-gold/10 group-hover:bg-gold/20 transition-colors">
+                        {faq.icon}
+                      </div>
+                      <div className="flex flex-col items-start gap-2">
+                        <span className="font-bold text-lg">{faq.question}</span>
+                        <Badge variant="secondary" className="text-xs bg-gold/20 text-gold border-gold/30">
+                          {faq.badge}
+                        </Badge>
+                      </div>
+                    </div>
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
-                    {faq.answer}
+                  <AccordionContent className="pt-2 pb-6">
+                    <div className="ml-14 text-muted-foreground leading-relaxed text-base bg-gradient-to-r from-background to-secondary/20 rounded-lg p-4 border-l-4 border-gold/30">
+                      {faq.answer}
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -74,13 +118,30 @@ const FAQ = () => {
           </Card>
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-lg text-muted-foreground mb-4">
-            Vous avez d'autres questions ?
-          </p>
-          <p className="text-gold font-semibold">
-            📞 Contactez-nous au +225 07 69 69 21 94 ou via WhatsApp
-          </p>
+        <div className="text-center mt-16">
+          <div className="bg-gradient-to-r from-navy/10 via-gold/10 to-navy/10 rounded-2xl p-8 max-w-2xl mx-auto border border-gold/20">
+            <div className="text-4xl mb-4">🌟</div>
+            <h3 className="text-2xl font-bold text-navy mb-4">
+              Une question spécifique ?
+            </h3>
+            <p className="text-lg text-muted-foreground mb-6">
+              Notre équipe passionnée est là pour vous répondre instantanément !
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="tel:+22507696921994" 
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gold to-gold/80 text-navy font-bold rounded-full hover:scale-105 transition-transform shadow-lg"
+              >
+                📞 +225 07 69 69 21 94
+              </a>
+              <a 
+                href="https://wa.me/22507696921994" 
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:scale-105 transition-transform shadow-lg"
+              >
+                💬 WhatsApp Direct
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
