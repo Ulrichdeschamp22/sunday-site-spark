@@ -39,7 +39,12 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="gold" size="lg" className="text-lg px-8 py-4">
+            <Button 
+              variant="gold" 
+              size="lg" 
+              className="text-lg px-8 py-4"
+              onClick={() => window.open('https://wa.me/2250769692194?text=Bonjour, je souhaite réserver une chambre à l\'Hôtel Résidence Sunday', '_blank')}
+            >
               Réserver maintenant
             </Button>
             <Button 
