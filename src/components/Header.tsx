@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { useState } from "react";
+import ReservationForm from "./ReservationForm";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -52,7 +54,11 @@ const Header = () => {
               <Phone className="w-4 h-4" />
               WhatsApp
             </Button>
-            <Button variant="gold" size="sm">
+            <Button 
+              variant="gold" 
+              size="sm"
+              onClick={() => setIsReservationOpen(true)}
+            >
               Réserver
             </Button>
           </div>
@@ -94,7 +100,11 @@ const Header = () => {
                   <Phone className="w-4 h-4" />
                   WhatsApp
                 </Button>
-                <Button variant="gold" size="sm">
+                <Button 
+                  variant="gold" 
+                  size="sm"
+                  onClick={() => setIsReservationOpen(true)}
+                >
                   Réserver
                 </Button>
               </div>
@@ -102,6 +112,12 @@ const Header = () => {
           </div>
         )}
       </div>
+      
+      {/* Formulaire de réservation */}
+      <ReservationForm 
+        isOpen={isReservationOpen} 
+        onClose={() => setIsReservationOpen(false)} 
+      />
     </header>
   );
 };
