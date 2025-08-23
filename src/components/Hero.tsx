@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-hotel.jpg";
+import ReservationForm from "./ReservationForm";
 
 const Hero = () => {
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
+
   return (
     <section id="accueil" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -43,7 +47,7 @@ const Hero = () => {
               variant="gold" 
               size="lg" 
               className="text-lg px-8 py-4"
-              onClick={() => window.open('https://wa.me/2250769692194?text=Bonjour, je souhaite réserver une chambre à l\'Hôtel Résidence Sunday', '_blank')}
+              onClick={() => setIsReservationOpen(true)}
             >
               Réserver maintenant
             </Button>
@@ -73,6 +77,12 @@ const Hero = () => {
           <div className="w-1 h-3 bg-gold rounded-full mt-2"></div>
         </div>
       </div>
+
+      {/* Formulaire de réservation */}
+      <ReservationForm 
+        isOpen={isReservationOpen} 
+        onClose={() => setIsReservationOpen(false)} 
+      />
     </section>
   );
 };
