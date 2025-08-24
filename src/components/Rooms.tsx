@@ -46,20 +46,20 @@ const Rooms = () => {
         </div>
 
         {/* Room Types */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          <div>
-            <h3 className="text-3xl font-semibold mb-8 text-navy">Nos Types de Chambres</h3>
+        <div className="mb-20">
+          <h3 className="text-3xl font-semibold mb-8 text-center text-navy">Nos Types de Chambres</h3>
+          <div className="max-w-3xl mx-auto">
             <div className="space-y-6">
               {roomTypes.map((room, index) => (
                 <Card key={index} className="border-gold/20 hover:shadow-elegant transition-all duration-300">
                   <CardHeader>
-                    <CardTitle className="text-xl text-navy">{room.name}</CardTitle>
+                    <CardTitle className="text-xl text-navy text-center">{room.name}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-4">{room.description}</p>
+                    <p className="text-muted-foreground mb-4 text-center">{room.description}</p>
                     <ul className="space-y-2">
                       {room.features.map((feature, i) => (
-                        <li key={i} className="flex items-center text-sm">
+                        <li key={i} className="flex items-center text-sm justify-center">
                           <div className="w-2 h-2 bg-gold rounded-full mr-3"></div>
                           {feature}
                         </li>
@@ -69,7 +69,7 @@ const Rooms = () => {
                 </Card>
               ))}
             </div>
-            <div className="mt-8">
+            <div className="mt-8 text-center">
               <Button 
                 variant="gold" 
                 size="lg"
@@ -78,10 +78,6 @@ const Rooms = () => {
                 Voir nos tarifs
               </Button>
             </div>
-          </div>
-
-          <div className="lg:pl-8 flex items-center justify-center">
-            {/* Suppression de l'image - section maintenant plus simple et claire */}
           </div>
         </div>
 
