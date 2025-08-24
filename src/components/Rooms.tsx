@@ -1,24 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Wifi, Snowflake, Tv, Car, Clock, Utensils } from "lucide-react";
-import roomImage from "@/assets/room-luxury.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Rooms = () => {
+  const navigate = useNavigate();
+  
   const roomTypes = [
     {
       name: "Chambre Standard",
-      description: "Confortable et élégante, idéale pour un séjour d'affaires ou de loisir",
-      features: ["Lit double", "Salle de bain privée", "Bureau de travail"]
+      description: "Parfaite pour un séjour confortable avec toutes les commodités essentielles.",
+      features: ["Canal+ formule accès", "Climatisée", "Petit-Déjeuner inclus", "Accès à la Piscine"]
     },
     {
-      name: "Chambre Double",
-      description: "Spacieuse avec deux lits, parfaite pour les amis ou collègues",
-      features: ["Deux lits simples", "Grand espace", "Coin salon"]
+      name: "Chambre Standard Plus",
+      description: "Un niveau de confort supérieur avec plus de chaînes et d'espace.",
+      features: ["Canal+ formule évasion", "Climatisée", "Petit-Déjeuner inclus", "Accès à la Piscine"]
     },
     {
-      name: "Suite",
-      description: "Le summum du luxe avec salon séparé et prestations premium",
-      features: ["Chambre + salon", "Balcon privé", "Service premium"]
+      name: "Suite Junior",
+      description: "Le summum du luxe avec eau chaude et espace généreux.",
+      features: ["Canal+ formule évasion", "Climatisée", "Petit-Déjeuner inclus", "Accès à la Piscine", "Eau chaude"]
     }
   ];
 
@@ -68,18 +70,18 @@ const Rooms = () => {
               ))}
             </div>
             <div className="mt-8">
-              <Button variant="gold" size="lg">
+              <Button 
+                variant="gold" 
+                size="lg"
+                onClick={() => navigate('/chambres')}
+              >
                 Voir nos tarifs
               </Button>
             </div>
           </div>
 
-          <div className="lg:pl-8">
-            <img 
-              src={roomImage} 
-              alt="Chambre luxueuse de l'Hôtel Résidence Sunday"
-              className="w-full h-auto rounded-lg shadow-elegant"
-            />
+          <div className="lg:pl-8 flex items-center justify-center">
+            {/* Suppression de l'image - section maintenant plus simple et claire */}
           </div>
         </div>
 
