@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone } from "lucide-react";
-import standardSymbol from "@/assets/standard-symbol.jpg";
-import standardPlusSymbol from "@/assets/standard-plus-symbol.jpg";
-import suiteJuniorSymbol from "@/assets/suite-junior-symbol.jpg";
+import standardIllustration from "@/assets/standard-illustration.jpg";
+import standardPlusIllustration from "@/assets/standard-plus-illustration.jpg";
+import suiteJuniorIllustration from "@/assets/suite-junior-illustration.jpg";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,7 +23,7 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Parfaite pour un séjour confortable avec toutes les commodités essentielles.",
-        image: standardSymbol
+        image: standardIllustration
       },
       {
         name: "Chambre Standard Plus",
@@ -35,7 +35,7 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Un niveau de confort supérieur avec plus de chaînes et d'espace.",
-        image: standardPlusSymbol
+        image: standardPlusIllustration
       },
       {
         name: "Suite Junior",
@@ -48,7 +48,7 @@ const Chambres = () => {
           "Eau chaude"
         ],
         description: "Le summum du luxe avec eau chaude et espace généreux.",
-        image: suiteJuniorSymbol
+        image: suiteJuniorIllustration
       }
     ],
     journée: [
@@ -61,7 +61,7 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Idéale pour une journée de détente (10h-17h, du lundi au jeudi).",
-        image: standardSymbol
+        image: standardIllustration
       },
       {
         name: "Chambre Standard Plus",
@@ -72,7 +72,7 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Plus d'espace et de confort pour votre journée (10h-17h, du lundi au jeudi).",
-        image: standardPlusSymbol
+        image: standardPlusIllustration
       },
       {
         name: "Suite Junior",
@@ -84,7 +84,7 @@ const Chambres = () => {
           "Eau chaude"
         ],
         description: "Luxe et confort pour une journée exceptionnelle (10h-17h, du lundi au jeudi).",
-        image: suiteJuniorSymbol
+        image: suiteJuniorIllustration
       }
     ]
   };
