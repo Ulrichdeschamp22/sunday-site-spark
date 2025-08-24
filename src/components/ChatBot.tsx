@@ -329,7 +329,7 @@ const ChatBot = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
-    setShowQuickReplies(false); // Masquer les questions rapides après envoi
+    // Garder les questions rapides visibles
 
     // Simulation d'une réponse avec délai
     setTimeout(() => {
