@@ -14,7 +14,7 @@ const Contact = () => {
       icon: Phone,
       title: "Téléphone",
       content: "+225 07 69 69 21 94",
-      action: () => window.open('tel:+2250769692194', '_blank')
+      action: () => window.location.href = 'tel:+2250769692194'
     },
     {
       icon: Clock,
@@ -87,7 +87,7 @@ const Contact = () => {
               variant="gold" 
               size="lg" 
               className="text-lg px-8 py-4"
-              onClick={() => window.open('tel:+2250769692194', '_blank')}
+              onClick={() => window.location.href = 'tel:+2250769692194'}
             >
               <Phone className="w-5 h-5" />
               Appeler maintenant
