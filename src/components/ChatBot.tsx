@@ -34,67 +34,272 @@ const ChatBot = () => {
   }, [messages]);
 
   const getKnowledgeBaseResponse = (question: string): string => {
-    const lowerQuestion = question.toLowerCase();
+    const lowerQuestion = question.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, ""); // Normaliser pour gérer les accents
     
-    // Réponses basées sur la knowledge base
-    if (lowerQuestion.includes('prix') || lowerQuestion.includes('tarif') || lowerQuestion.includes('coût')) {
-      return "Nos tarifs sont très compétitifs ! Nous proposons des chambres Standard, Double et Suite avec un excellent rapport qualité-prix. Pour connaître nos tarifs exacts, contactez-nous au +225 07 69 69 21 94 ou via WhatsApp.";
-    }
+    // Base de connaissances complète avec toutes les informations de l'hôtel
+    const knowledgeBase = {
+      // Informations sur les prix et chambres
+      pricing: {
+        keywords: ['prix', 'tarif', 'cout', 'combien', 'montant', 'budget', 'cher', 'abordable', 'reduction', 'promo', 'offre'],
+        chambres: {
+          standard: {
+            nuitee: "25.000 FCFA (de 11h à 11h le lendemain)",
+            journee: "15.000 FCFA (lundi au jeudi de 10h à 17h)",
+            inclus: "Canal+ formule accès, Climatisation, Petit-Déjeuner, Accès Piscine"
+          },
+          standardPlus: {
+            nuitee: "30.000 FCFA (de 11h à 11h le lendemain)",
+            journee: "20.000 FCFA (lundi au jeudi de 10h à 17h)",
+            inclus: "Canal+ formule évasion, Climatisation, Petit-Déjeuner, Accès Piscine"
+          },
+          suiteJunior: {
+            nuitee: "40.000 FCFA (de 11h à 11h le lendemain)",
+            journee: "25.000 FCFA (lundi au jeudi de 10h à 17h)",
+            inclus: "Canal+ formule évasion, Climatisation, Petit-Déjeuner, Accès Piscine, Eau chaude"
+          }
+        },
+        response: () => {
+          return `🏷️ **Nos Tarifs Chambres** (Excellent rapport qualité-prix!)\n\n` +
+            `📌 **Chambre Standard**: 25.000 FCFA/nuit | 15.000 FCFA/journée\n` +
+            `📌 **Chambre Standard Plus**: 30.000 FCFA/nuit | 20.000 FCFA/journée\n` +
+            `📌 **Suite Junior**: 40.000 FCFA/nuit | 25.000 FCFA/journée\n\n` +
+            `✨ Toutes incluent: Petit-déjeuner, Accès piscine, Canal+ et Climatisation\n` +
+            `🎁 **RÉDUCTION à partir de 3 jours de séjour!**\n\n` +
+            `📞 Réservez: +225 07 69 69 21 94 (WhatsApp disponible)`;
+        }
+      },
+      
+      // Réservations
+      reservations: {
+        keywords: ['reserver', 'reservation', 'booking', 'disponibilite', 'libre', 'comment reserver', 'je veux reserver', 'j aimerais reserver'],
+        response: () => "🎯 **Pour réserver votre séjour:**\n📱 WhatsApp/Téléphone: +225 07 69 69 21 94\n⏰ Disponible 24h/24 et 7j/7\n✅ Réservation simple et rapide\n💳 Paiement: Espèces, Mobile Money (Wave, Orange, MTN, Moov) ou Carte bancaire\n\n*Cliquez sur le bouton 'Réserver maintenant' pour remplir notre formulaire de réservation en ligne!*"
+      },
+      
+      // Chambres et équipements
+      rooms: {
+        keywords: ['chambre', 'room', 'suite', 'hebergement', 'logement', 'dormir', 'lit', 'equipement chambre', 'confort'],
+        response: () => "🛏️ **Nos Types de Chambres:**\n\n" +
+          "✨ **Chambre Standard** - Idéale pour voyageurs solo ou couples\n" +
+          "✨ **Chambre Standard Plus** - Plus spacieuse avec Canal+ évasion\n" +
+          "✨ **Suite Junior** - Luxueuse avec eau chaude\n\n" +
+          "**Équipements dans toutes les chambres:**\n" +
+          "✅ Climatisation\n✅ Wi-Fi gratuit haut débit\n✅ TV écran plat avec Canal+\n" +
+          "✅ Salle de bain privative\n✅ Service de ménage quotidien\n✅ Accès piscine"
+      },
+      
+      // Localisation et accès
+      location: {
+        keywords: ['adresse', 'ou', 'localisation', 'situe', 'emplacement', 'comment venir', 'se rendre', 'aller', 'acces', 'transport', 'bateau', 'pinasse', 'traversee', 'azito', 'bietry', 'yopougon'],
+        response: () => "📍 **Localisation:** Yopougon, Baie des Milliardaires, Abidjan\n\n" +
+          "🚤 **Accès depuis Yopougon:**\n" +
+          "• Rendez-vous à Yopougon Azito village (terminus wôrô-wôrô)\n" +
+          "• Descendre jusqu'au bord de la lagune\n" +
+          "• Traversée en pinasse: 2.500 FCFA aller-retour\n" +
+          "• Dernier départ: 18h30\n\n" +
+          "⛵ **Accès depuis Biétry:**\n" +
+          "• Descendre jusqu'au bord lagune (après hôtel Wafou)\n" +
+          "• Traversée en bateau: 10.000 FCFA aller-retour\n" +
+          "• Dernier départ: 18h30\n\n" +
+          "🏝️ Cadre paisible sur une île exclusive!"
+      },
+      
+      // Restaurant et gastronomie
+      restaurant: {
+        keywords: ['restaurant', 'manger', 'repas', 'petit dejeuner', 'dejeuner', 'diner', 'cuisine', 'plat', 'menu', 'gastronomie', 'nourriture', 'bar', 'boisson', 'boire'],
+        menuDetails: {
+          entrees: "Avocat au thon (5.000), Salade pommes de terre (6.000), Salade légumes crevettes (6.000)",
+          plats: "Poisson grillé (12-20.000), Poulet braisé (10.000), Kedjenou (12-15.000), Agouti (15.000), Lapin (12-15.000)",
+          accompagnements: "Attiéké, Alloco, Frites, Igname, Riz (1.000 chacun)",
+          boissons: "Bières (1.000-1.500), Vins (8-15.000), Champagne LP/Moët (40-45.000)",
+          desserts: "Glaces, Yaourt, Fruits de saison (1.000)"
+        },
+        response: () => "🍽️ **Restaurant & Bar Sur Place**\n\n" +
+          "🎯 **Nos Spécialités:**\n" +
+          "• Poisson frais grillé (12.000-20.000 FCFA)\n" +
+          "• Kedjenou de poulet/pintade (12.000 FCFA)\n" +
+          "• Agouti braisé (15.000 FCFA)\n" +
+          "• Poulet braisé (10.000 FCFA)\n" +
+          "• Marmite de pêcheur (15.000 FCFA)\n\n" +
+          "🥗 **Entrées:** 5.000-6.000 FCFA\n" +
+          "🍚 **Accompagnements:** Attiéké, Alloco, Frites (1.000 FCFA)\n" +
+          "🍷 **Cave à vins & Champagnes disponibles**\n" +
+          "🍺 **Bières locales et importées**\n\n" +
+          "✨ Cuisine locale et internationale de qualité!"
+      },
+      
+      // Services et loisirs
+      services: {
+        keywords: ['service', 'equipement', 'parking', 'piscine', 'activite', 'loisir', 'detente', 'sport', 'jeu', 'animation', 'navette', 'taxi', 'blanchisserie', 'excursion'],
+        response: () => "🌟 **Services & Équipements Premium:**\n\n" +
+          "🏊 **Loisirs:**\n• Piscine extérieure\n• Baby-foot\n• Balançoires\n• Tir à l'arc\n• Terrasses et jardins privatifs\n\n" +
+          "🚗 **Services Pratiques:**\n• Parking privé sécurisé gratuit\n• Service navette/taxi sur demande\n• Réception 24h/24\n• Service de blanchisserie\n• Wi-Fi haut débit gratuit\n\n" +
+          "💼 **Business:**\n• Salles de réunion\n• Espaces de coworking\n• Organisation d'événements\n\n" +
+          "🌴 Organisation d'excursions locales sur demande"
+      },
+      
+      // Paiements
+      payment: {
+        keywords: ['paiement', 'payer', 'mobile money', 'orange money', 'mtn', 'wave', 'moov', 'carte', 'espece', 'reglement'],
+        response: () => "💳 **Moyens de Paiement Acceptés:**\n\n" +
+          "💵 Espèces (FCFA)\n" +
+          "📱 **Mobile Money:**\n• Wave\n• Orange Money\n• MTN Money\n• Moov Money\n" +
+          "💳 Carte bancaire\n\n" +
+          "✅ Paiement sécurisé et facile!"
+      },
+      
+      // Horaires
+      hours: {
+        keywords: ['horaire', 'ouvert', 'ferme', 'heure', 'check in', 'check out', 'arrivee', 'depart'],
+        response: () => "⏰ **Horaires & Disponibilité:**\n\n" +
+          "🏨 Hôtel ouvert **24h/24 et 7j/7**\n" +
+          "✅ Check-in: À partir de **11h**\n" +
+          "✅ Check-out: Avant **11h le lendemain**\n\n" +
+          "📞 Réception disponible 24h/24\n" +
+          "🚤 Dernier bateau/pinasse: **18h30**"
+      },
+      
+      // Événements et séminaires
+      events: {
+        keywords: ['evenement', 'seminaire', 'conference', 'reunion', 'mariage', 'anniversaire', 'fete', 'celebration', 'entreprise', 'formation', 'colloque'],
+        response: () => "🎉 **Organisation d'Événements:**\n\n" +
+          "✨ **Nous accueillons:**\n" +
+          "• Séminaires d'entreprise\n• Conférences et formations\n" +
+          "• Mariages et anniversaires\n• Réunions d'affaires\n• Lancements de produits\n• Assemblées générales\n\n" +
+          "**Nos atouts:**\n" +
+          "✅ Salles modulables climatisées\n" +
+          "✅ Wi-Fi haut débit\n" +
+          "✅ Restauration sur mesure\n" +
+          "✅ Hébergement sur place\n" +
+          "✅ Cadre inspirant et calme\n" +
+          "✅ Parking sécurisé\n\n" +
+          "📞 Contactez-nous pour un devis personnalisé: +225 07 69 69 21 94"
+      },
+      
+      // Avis clients
+      testimonials: {
+        keywords: ['avis', 'temoignage', 'commentaire', 'opinion', 'experience', 'satisfaction', 'recommandation', 'note', 'evaluation'],
+        response: () => "⭐ **Avis de nos Clients Satisfaits:**\n\n" +
+          "💬 **Keti Mia:** *\"Très bel accueil, cadre au top ! Rapport qualité prix excellent ! Très très satisfaite.\"*\n\n" +
+          "💬 **Brice-Roland Kouassi:** *\"Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, accueil chaleureux, on se sent en famille et en sécurité.\"*\n\n" +
+          "💬 **Kouadio Serge:** *\"Les chambres sont spacieuses, modernes et incroyablement confortables. Se détendre au bord de la piscine est un vrai bonheur !\"*\n\n" +
+          "💬 **N'Guessan Christophe:** *\"Chambres lumineuses, propres et ultra-confortables. Se réveiller et profiter de la piscine est un vrai plaisir.\"*\n\n" +
+          "🌟 Rejoignez nos clients satisfaits!"
+      },
+      
+      // Contact
+      contact: {
+        keywords: ['contact', 'telephone', 'whatsapp', 'appeler', 'joindre', 'numero', 'coordonnees'],
+        response: () => "📞 **Contactez-nous:**\n\n" +
+          "📱 Téléphone & WhatsApp: **+225 07 69 69 21 94**\n" +
+          "⏰ Disponible 24h/24 et 7j/7\n" +
+          "📍 Yopougon, Baie des Milliardaires, Abidjan\n\n" +
+          "💬 N'hésitez pas à nous contacter pour toute question ou réservation!"
+      },
+      
+      // WiFi et connectivité
+      wifi: {
+        keywords: ['wifi', 'internet', 'connexion', 'reseau', 'connectivite'],
+        response: () => "📶 **Wi-Fi Gratuit Haut Débit**\n\n✅ Disponible dans toutes les chambres\n✅ Disponible dans tous les espaces communs\n✅ Connexion rapide et stable\n✅ Idéal pour le télétravail\n✅ Streaming et visioconférence sans problème"
+      },
+      
+      // Familles et enfants
+      family: {
+        keywords: ['famille', 'enfant', 'bebe', 'familial', 'kid', 'parents'],
+        response: () => "👨‍👩‍👧‍👦 **Hôtel Familial par Excellence!**\n\n" +
+          "✅ Chambres spacieuses pour familles\n" +
+          "✅ Cadre sécurisé et paisible\n" +
+          "✅ Piscine adaptée aux enfants\n" +
+          "✅ Aires de jeux (balançoires)\n" +
+          "✅ Activités ludiques (baby-foot, tir à l'arc)\n" +
+          "✅ Menus enfants au restaurant\n" +
+          "✅ Personnel attentionné aux besoins des familles\n\n" +
+          "🌟 Vos enfants vont adorer leur séjour!"
+      }
+    };
     
-    if (lowerQuestion.includes('réserver') || lowerQuestion.includes('réservation') || lowerQuestion.includes('booking')) {
-      return "Pour réserver, contactez-nous directement au +225 07 69 69 21 94 ou via WhatsApp. Nous sommes ouverts 24h/24 et 7j/7 pour vous accueillir !";
-    }
+    // Fonction pour trouver la meilleure correspondance
+    const findBestMatch = () => {
+      let bestMatch = null;
+      let maxScore = 0;
+      
+      for (const [key, category] of Object.entries(knowledgeBase)) {
+        const keywords = category.keywords;
+        let score = 0;
+        
+        for (const keyword of keywords) {
+          if (lowerQuestion.includes(keyword)) {
+            // Donner plus de poids aux mots exacts
+            score += keyword.split(' ').length > 1 ? 3 : 2;
+            
+            // Bonus si le mot est au début de la question
+            if (lowerQuestion.startsWith(keyword)) {
+              score += 2;
+            }
+          }
+        }
+        
+        if (score > maxScore) {
+          maxScore = score;
+          bestMatch = category;
+        }
+      }
+      
+      return bestMatch;
+    };
     
-    if (lowerQuestion.includes('chambre') || lowerQuestion.includes('room')) {
-      return "Nous proposons 3 types de chambres : Standard, Double et Suite. Toutes nos chambres sont équipées de Wi-Fi gratuit, climatisation, télévision à écran plat, salle de bain privative et service de ménage quotidien.";
-    }
-    
-    if (lowerQuestion.includes('adresse') || lowerQuestion.includes('où') || lowerQuestion.includes('localisation') || lowerQuestion.includes('situé')) {
-      return "Nous sommes situés à Yopougon, Baie des Milliardaires, Abidjan, Côte d'Ivoire. Un cadre paisible et verdoyant, parfait pour vos détentes !";
-    }
-    
-    if (lowerQuestion.includes('restaurant') || lowerQuestion.includes('manger') || lowerQuestion.includes('repas') || lowerQuestion.includes('petit-déjeuner')) {
-      return "Nous avons un restaurant et bar sur place proposant une cuisine locale et internationale. Nos spécialités incluent des plats ivoiriens, grillades et poissons frais très appréciés par nos clients !";
-    }
-    
-    if (lowerQuestion.includes('service') || lowerQuestion.includes('équipement') || lowerQuestion.includes('parking')) {
-      return "Nos services incluent : parking privé sécurisé, service de navette/taxi, salle de réunion, réception 24h/24, service de blanchisserie et organisation d'excursions locales.";
-    }
-    
-    if (lowerQuestion.includes('paiement') || lowerQuestion.includes('payer') || lowerQuestion.includes('mobile money')) {
-      return "Nous acceptons : espèces (FCFA), Mobile Money (Orange Money, MTN Money, Moov Money) et carte bancaire.";
-    }
-    
-    if (lowerQuestion.includes('horaire') || lowerQuestion.includes('ouvert') || lowerQuestion.includes('heure')) {
-      return "Nous sommes ouverts 24h/24 et 7j/7 pour votre confort ! Check-in à partir de 14h, check-out avant 12h.";
-    }
-    
-    if (lowerQuestion.includes('avis') || lowerQuestion.includes('recommandation') || lowerQuestion.includes('témoignage')) {
-      return "Nos clients nous recommandent ! Keti Mia : 'Très bel accueil, cadre au top ! Rapport qualité prix excellent !' Brice-Roland Kouassi : 'Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, on se sent en famille et en sécurité.'";
-    }
-    
-    if (lowerQuestion.includes('wifi') || lowerQuestion.includes('internet')) {
-      return "Oui, nous proposons un Wi-Fi gratuit dans toutes nos chambres et espaces communs !";
-    }
-    
-    if (lowerQuestion.includes('famille') || lowerQuestion.includes('enfant') || lowerQuestion.includes('bébé')) {
-      return "Bien sûr ! Nous accueillons les familles avec plaisir. Notre cadre sécurisé et paisible est parfait pour les familles en vacances.";
-    }
-    
-    if (lowerQuestion.includes('contact') || lowerQuestion.includes('téléphone') || lowerQuestion.includes('whatsapp')) {
-      return "Contactez-nous au +225 07 69 69 21 94 (téléphone et WhatsApp). Nous sommes disponibles 24h/24 pour répondre à vos questions !";
-    }
-    
-    if (lowerQuestion.includes('bonjour') || lowerQuestion.includes('salut') || lowerQuestion.includes('hello')) {
-      return "Bonjour ! Bienvenue à l'Hôtel Résidence Sunday ! 🌟 Comment puis-je vous aider aujourd'hui ?";
+    // Salutations et politesse
+    if (lowerQuestion.match(/^(bonjour|salut|bonsoir|hello|hi|hey|coucou)/)) {
+      return "👋 Bonjour et bienvenue à l'Hôtel Résidence Sunday ! 🌟\n\nJe suis votre assistant virtuel disponible 24h/24. Comment puis-je vous aider aujourd'hui ?\n\n" +
+        "Vous pouvez me poser des questions sur:\n• Nos chambres et tarifs\n• Les réservations\n• Notre restaurant\n• Les services et activités\n• Comment nous rejoindre\n\nN'hésitez pas, je suis là pour vous! 😊";
     }
     
     if (lowerQuestion.includes('merci') || lowerQuestion.includes('thank')) {
-      return "Je vous en prie ! N'hésitez pas si vous avez d'autres questions. Nous avons hâte de vous accueillir à l'Hôtel Résidence Sunday ! 😊";
+      return "😊 Je vous en prie ! C'est un plaisir de vous aider.\n\nN'hésitez pas si vous avez d'autres questions. Nous avons hâte de vous accueillir à l'Hôtel Résidence Sunday pour un séjour inoubliable ! 🌟\n\n📞 Pour réserver: +225 07 69 69 21 94";
     }
     
-    // Réponse par défaut
-    return "Je suis là pour vous renseigner sur l'Hôtel Résidence Sunday ! Vous pouvez me poser des questions sur nos chambres, services, tarifs, localisation, réservations, restaurant... N'hésitez pas ! 😊";
+    if (lowerQuestion.includes('au revoir') || lowerQuestion.includes('bye') || lowerQuestion.includes('a bientot')) {
+      return "👋 Au revoir et à très bientôt !\n\nNous espérons vous accueillir prochainement à l'Hôtel Résidence Sunday. Passez une excellente journée ! 🌟\n\n📞 N'oubliez pas: +225 07 69 69 21 94 pour vos réservations!";
+    }
+    
+    // Chercher la meilleure correspondance
+    const match = findBestMatch();
+    
+    if (match && match.response) {
+      return match.response();
+    }
+    
+    // Questions sur les réductions et offres spéciales
+    if (lowerQuestion.includes('reduction') || lowerQuestion.includes('promotion') || lowerQuestion.includes('offre')) {
+      return "🎁 **Offres Spéciales:**\n\n✨ **RÉDUCTION pour séjours de 3 jours et plus!**\n\n" +
+        "Contactez-nous pour connaître nos offres du moment:\n📞 +225 07 69 69 21 94\n\n" +
+        "Nous proposons régulièrement des tarifs préférentiels pour:\n• Les séjours longue durée\n• Les groupes\n• Les événements d'entreprise";
+    }
+    
+    // Questions sur la sécurité
+    if (lowerQuestion.includes('securite') || lowerQuestion.includes('securise') || lowerQuestion.includes('sur')) {
+      return "🔒 **Sécurité & Tranquillité:**\n\n" +
+        "✅ Établissement entièrement sécurisé 24h/24\n" +
+        "✅ Parking privé surveillé\n" +
+        "✅ Cadre paisible sur une île privée\n" +
+        "✅ Personnel de sécurité professionnel\n" +
+        "✅ Coffres-forts disponibles\n\n" +
+        "Votre sécurité et votre confort sont nos priorités!";
+    }
+    
+    // Réponse par défaut enrichie
+    return "💬 Je suis l'assistant virtuel de l'Hôtel Résidence Sunday, disponible 24h/24 pour répondre à toutes vos questions!\n\n" +
+      "**Voici ce que je peux vous dire sur:**\n" +
+      "🏨 Nos chambres et tarifs\n" +
+      "📅 Les réservations\n" +
+      "🍽️ Notre restaurant et menu\n" +
+      "🏊 Nos services et activités\n" +
+      "📍 Comment nous rejoindre\n" +
+      "💳 Les moyens de paiement\n" +
+      "🎉 L'organisation d'événements\n\n" +
+      "**Posez-moi votre question plus précisément** et je vous donnerai tous les détails!\n\n" +
+      "Exemples: \"Quels sont vos tarifs?\", \"Comment réserver?\", \"Avez-vous une piscine?\"";
   };
 
   const handleSend = () => {
