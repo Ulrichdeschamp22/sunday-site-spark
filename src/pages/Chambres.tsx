@@ -133,7 +133,7 @@ const Chambres = () => {
           
           {selectedCategory === "nuitée" && (
             <div className="text-center mt-4">
-              <p className="text-muted-foreground">Check-in: 11h - Check-out: 11h le lendemain</p>
+              <p className="text-muted-foreground">Entrée : 11 Heure — Sortie : 11 Heure</p>
               <p className="text-gold font-semibold">💰 Réduction à partir de 3 jours de séjour !</p>
             </div>
           )}
