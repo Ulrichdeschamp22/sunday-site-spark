@@ -1,13 +1,37 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone, Sparkles, Crown, Gem } from "lucide-react";
+import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone, Sparkles, Crown, Gem, MessageCircle } from "lucide-react";
 import chambresHero from "@/assets/chambres-hero.jpg";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const Chambres = () => {
   const [selectedCategory, setSelectedCategory] = useState("nuitée");
+  const [selectedRoom, setSelectedRoom] = useState<{name: string, category: string} | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleReservation = (room: any) => {
+    setSelectedRoom({ name: room.name, category: selectedCategory });
+    setIsDialogOpen(true);
+  };
+
+  const handleCallHotel = () => {
+    window.location.href = 'tel:+2250769692194';
+    setIsDialogOpen(false);
+  };
+
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/2250769692194?text=' + encodeURIComponent(`Bonjour, je souhaite réserver une ${selectedRoom?.name} pour ${selectedRoom?.category === 'nuitée' ? 'la nuit' : 'la journée'}.`), '_blank');
+    setIsDialogOpen(false);
+  };
 
   const chambresData = {
     nuitée: [
@@ -190,7 +214,7 @@ const Chambres = () => {
                     
                     <Button 
                       className={`w-full bg-gradient-to-r ${room.gradient} text-white border-0 hover:opacity-90 hover:shadow-xl transition-all duration-300`}
-                      onClick={() => window.open('https://wa.me/2250769692194?text=' + encodeURIComponent(`Bonjour, je souhaite réserver une ${room.name} pour ${selectedCategory === 'nuitée' ? 'la nuit' : 'la journée'}.`), '_blank')}
+                      onClick={() => handleReservation(room)}
                     >
                       <Phone className="w-4 h-4 mr-2" />
                       Réserver maintenant
@@ -235,6 +259,52 @@ const Chambres = () => {
           </div>
         </div>
       </section>
+
+      {/* Reservation Dialog */}
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent className="max-w-md">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-xl font-bold text-center text-navy">
+              Comment souhaitez-vous réserver ?
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-center text-muted-foreground pt-2">
+              {selectedRoom && (
+                <span className="block text-lg font-medium text-foreground mb-4">
+                  {selectedRoom.name} - {selectedRoom.category === 'nuitée' ? 'Nuitée' : 'Journée'}
+                </span>
+              )}
+              Choisissez votre mode de contact préféré
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          
+          <div className="flex flex-col gap-4 mt-6">
+            <Button
+              variant="gold"
+              size="lg"
+              onClick={handleCallHotel}
+              className="flex items-center justify-center gap-3 py-6"
+            >
+              <Phone className="w-5 h-5" />
+              <span className="font-semibold">Appeler l'hôtel</span>
+            </Button>
+            
+            <Button
+              className="flex items-center justify-center gap-3 py-6 bg-green-500 hover:bg-green-600 text-white"
+              size="lg"
+              onClick={handleWhatsApp}
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span className="font-semibold">Contacter sur WhatsApp</span>
+            </Button>
+          </div>
+          
+          <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+            <p className="text-sm text-center text-muted-foreground">
+              Service disponible 24h/24 et 7j/7
+            </p>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <Footer />
     </div>
