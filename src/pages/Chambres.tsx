@@ -1,9 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone } from "lucide-react";
-import standardIllustration from "@/assets/standard-illustration.jpg";
-import standardPlusIllustration from "@/assets/standard-plus-illustration.jpg";
-import suiteJuniorIllustration from "@/assets/suite-junior-illustration.jpg";
+import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone, Sparkles, Crown, Gem } from "lucide-react";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,7 +20,8 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Parfaite pour un séjour confortable avec toutes les commodités essentielles.",
-        image: standardIllustration
+        icon: Star,
+        gradient: "from-amber-400 to-orange-500"
       },
       {
         name: "Chambre Standard Plus",
@@ -35,7 +33,8 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Un niveau de confort supérieur avec plus de chaînes et d'espace.",
-        image: standardPlusIllustration
+        icon: Sparkles,
+        gradient: "from-blue-400 to-indigo-600"
       },
       {
         name: "Suite Junior",
@@ -48,7 +47,8 @@ const Chambres = () => {
           "Eau chaude"
         ],
         description: "Le summum du luxe avec eau chaude et espace généreux.",
-        image: suiteJuniorIllustration
+        icon: Crown,
+        gradient: "from-purple-500 to-pink-600"
       }
     ],
     journée: [
@@ -61,7 +61,8 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Idéale pour une journée de détente (10h-17h, du lundi au jeudi).",
-        image: standardIllustration
+        icon: Star,
+        gradient: "from-amber-400 to-orange-500"
       },
       {
         name: "Chambre Standard Plus",
@@ -72,7 +73,8 @@ const Chambres = () => {
           "Accès à la Piscine"
         ],
         description: "Plus d'espace et de confort pour votre journée (10h-17h, du lundi au jeudi).",
-        image: standardPlusIllustration
+        icon: Sparkles,
+        gradient: "from-blue-400 to-indigo-600"
       },
       {
         name: "Suite Junior",
@@ -84,7 +86,8 @@ const Chambres = () => {
           "Eau chaude"
         ],
         description: "Luxe et confort pour une journée exceptionnelle (10h-17h, du lundi au jeudi).",
-        image: suiteJuniorIllustration
+        icon: Crown,
+        gradient: "from-purple-500 to-pink-600"
       }
     ]
   };
@@ -150,48 +153,49 @@ const Chambres = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {chambresData[selectedCategory].map((room, index) => (
-              <Card 
-                key={index} 
-                className="overflow-hidden hover:shadow-elegant transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-background to-muted/20"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={room.image} 
-                    alt={room.name}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  />
-                  <div className="absolute top-4 right-4 bg-gold text-navy px-3 py-1 rounded-full font-bold">
-                    {room.price}
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-navy to-navy-light bg-clip-text text-transparent">
-                    {room.name}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">{room.description}</p>
-                  
-                  <div className="space-y-2 mb-6">
-                    {room.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center space-x-2">
-                        <Star className="w-4 h-4 text-gold" />
-                        <span className="text-sm">{feature}</span>
-                      </div>
-                    ))}
+            {chambresData[selectedCategory].map((room, index) => {
+              const Icon = room.icon;
+              return (
+                <Card 
+                  key={index} 
+                  className="overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-br from-background via-muted/10 to-background"
+                >
+                  <div className={`relative h-40 bg-gradient-to-br ${room.gradient} flex items-center justify-center`}>
+                    <div className="absolute inset-0 bg-black/20" />
+                    <Icon className="w-20 h-20 text-white relative z-10 drop-shadow-2xl" />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-foreground px-4 py-2 rounded-full font-bold shadow-lg">
+                      {room.price}
+                    </div>
                   </div>
                   
-                  <Button 
-                    variant="gold" 
-                    className="w-full"
-                    onClick={() => window.open('https://wa.me/2250769692194?text=' + encodeURIComponent(`Bonjour, je souhaite réserver une ${room.name} pour ${selectedCategory === 'nuitée' ? 'la nuit' : 'la journée'}.`), '_blank')}
-                  >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Réserver maintenant
-                  </Button>
-                </div>
-              </Card>
-            ))}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">
+                      {room.name}
+                    </h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">{room.description}</p>
+                    
+                    <div className="space-y-3 mb-6">
+                      {room.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center space-x-3 group">
+                          <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${room.gradient} flex items-center justify-center transform transition-transform group-hover:scale-110`}>
+                            <Star className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-sm text-foreground/80 group-hover:text-foreground transition-colors">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Button 
+                      className={`w-full bg-gradient-to-r ${room.gradient} text-white border-0 hover:opacity-90 hover:shadow-xl transition-all duration-300`}
+                      onClick={() => window.open('https://wa.me/2250769692194?text=' + encodeURIComponent(`Bonjour, je souhaite réserver une ${room.name} pour ${selectedCategory === 'nuitée' ? 'la nuit' : 'la journée'}.`), '_blank')}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Réserver maintenant
+                    </Button>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
