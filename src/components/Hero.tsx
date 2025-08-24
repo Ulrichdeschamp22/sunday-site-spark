@@ -1,26 +1,23 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-hotel.jpg";
-import sundayBeach1 from "@/assets/sunday-beach-1.jpg";
-import sundayBeach2 from "@/assets/sunday-beach-2.jpg";
-import sundayBeach3 from "@/assets/sunday-beach-3.jpg";
-import sundayBeach4 from "@/assets/sunday-beach-4.jpg";
-import sundayBeach5 from "@/assets/sunday-beach-5.jpg";
 import ReservationForm from "./ReservationForm";
 
 const Hero = () => {
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Array of images for the carousel
+  // Array of images for the carousel - using the 9 new images
   const images = [
-    heroImage,
-    sundayBeach1,
-    sundayBeach2,
-    sundayBeach3,
-    sundayBeach4,
-    sundayBeach5
+    "/lovable-uploads/e8a8a12c-b07b-43d2-8e4c-261c50e6bcfe.png",
+    "/lovable-uploads/ea179e67-63fa-4565-9c1e-8db037ce0cd7.png",
+    "/lovable-uploads/2c335eca-a0d7-4953-bf3b-ad08a8d7c7b4.png",
+    "/lovable-uploads/8f7f4a18-3e57-4af7-87b4-ee18f0048f8c.png",
+    "/lovable-uploads/f61a107c-997b-478f-b0e7-fbda5ecae314.png",
+    "/lovable-uploads/3014da47-6bb0-4c81-8eb6-47af7f6ba4cf.png",
+    "/lovable-uploads/13d4d61e-6886-4b45-aa72-f60598bdd205.png",
+    "/lovable-uploads/be95b4f4-d370-453b-b6ca-f08f63fbe037.png",
+    "/lovable-uploads/a36f18ca-a47c-4616-a9b7-c543ec8f56f8.png"
   ];
 
   // Auto-rotate images every 5 seconds
