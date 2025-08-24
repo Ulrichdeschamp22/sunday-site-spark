@@ -87,13 +87,13 @@ const Services = () => {
     {
       icon: <Briefcase className="w-12 h-12" />,
       title: "Espaces de Coworking",
-      description: "Salles équipées pour vos réunions d'affaires et sessions de travail",
+      description: "Espaces modernes pour vos sessions de travail et networking",
       highlight: true
     },
     {
       icon: <Calendar className="w-12 h-12" />,
       title: "Organisation d'Événements",
-      description: "Accompagnement personnalisé pour vos séminaires, mariages et célébrations",
+      description: "Accompagnement personnalisé pour vos mariages et célébrations",
       highlight: true
     }
   ];
@@ -214,13 +214,13 @@ const Services = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                <Users className="w-12 h-12 text-gold mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">Séminaires</h3>
-                <p className="text-white/80">Salles équipées pour vos réunions et formations</p>
+                <Gift className="w-12 h-12 text-gold mx-auto mb-4" />
+                <h3 className="text-xl font-bold mb-2">Mariages</h3>
+                <p className="text-white/80">Cadre idyllique pour votre jour spécial</p>
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                <Gift className="w-12 h-12 text-gold mx-auto mb-4" />
+                <Users className="w-12 h-12 text-gold mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-2">Événements</h3>
                 <p className="text-white/80">Lancements de produits, cocktails, soirées d'entreprise</p>
               </div>

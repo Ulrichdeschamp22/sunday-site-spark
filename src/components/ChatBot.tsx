@@ -46,7 +46,10 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
+  const [lastUserMessage, setLastUserMessage] = useState<string>("");
+  
   const getKnowledgeBaseResponse = (question: string): string => {
+    setLastUserMessage(question);
     const lowerQuestion = question.toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, ""); // Normaliser pour gérer les accents
@@ -148,7 +151,7 @@ const ChatBot = () => {
         response: () => "🌟 **Services & Équipements Premium:**\n\n" +
           "🏊 **Loisirs:**\n• Piscine extérieure\n• Baby-foot\n• Balançoires\n• Tir à l'arc\n• Terrasses et jardins privatifs\n\n" +
           "🚗 **Services Pratiques:**\n• Parking privé sécurisé gratuit\n• Service navette/taxi sur demande\n• Réception 24h/24\n• Service de blanchisserie\n• Wi-Fi haut débit gratuit\n\n" +
-          "💼 **Business:**\n• Salles de réunion\n• Espaces de coworking\n• Organisation d'événements\n\n" +
+          "💼 **Business:**\n• Espaces de coworking\n• Organisation d'événements\n\n" +
           "🌴 Organisation d'excursions locales sur demande"
       },
       
