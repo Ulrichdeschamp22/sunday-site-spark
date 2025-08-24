@@ -396,6 +396,35 @@ const ChatBot = () => {
             </div>
           </div>
 
+          {/* Questions rapides en haut */}
+          {showQuickReplies && messages.length === 1 && (
+            <div className="px-4 py-3 bg-gradient-to-r from-gold/10 to-gold-light/10 border-b border-gold/20">
+              <p className="text-xs text-center text-navy/70 font-semibold mb-2">Questions fréquentes :</p>
+              <div className="flex flex-wrap gap-1.5 justify-center">
+                {quickReplies.slice(0, 4).map((question, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleQuickReply(question)}
+                    className="text-xs px-2.5 py-1.5 bg-white hover:bg-gold/10 text-navy border border-gold/30 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-1.5 justify-center mt-1.5">
+                {quickReplies.slice(4).map((question, index) => (
+                  <button
+                    key={index + 4}
+                    onClick={() => handleQuickReply(question)}
+                    className="text-xs px-2.5 py-1.5 bg-white hover:bg-gold/10 text-navy border border-gold/30 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Messages */}
           <div className="flex-1 p-4 overflow-y-auto h-80 space-y-3">
             {messages.map((message) => (
@@ -459,23 +488,6 @@ const ChatBot = () => {
               </Button>
             </div>
             
-            {/* Questions rapides */}
-            {showQuickReplies && messages.length === 1 && (
-              <div className="mt-3 space-y-2">
-                <p className="text-xs text-center text-navy/60 font-semibold">Questions fréquentes :</p>
-                <div className="flex flex-wrap gap-2">
-                  {quickReplies.map((question, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleQuickReply(question)}
-                      className="text-xs px-3 py-2 bg-gradient-to-r from-gold/10 to-gold-light/10 hover:from-gold/20 hover:to-gold-light/20 text-navy border border-gold/30 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-sm"
-                    >
-                      {question}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
             
             <p className="text-xs text-center mt-2 text-navy/60">
               Réponses basées sur les informations de l'hôtel
