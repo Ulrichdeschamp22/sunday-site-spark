@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Phone, Coffee, Fish, Wine, Utensils } from "lucide-react";
+import { Phone, Coffee, Wine, Utensils, IceCream, Milk, Cherry, ChefHat, Drumstick, Rabbit, Bird, Soup } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import restaurant from "@/assets/restaurant.jpg";
@@ -135,18 +135,32 @@ const Gastronomies = () => {
             {/* Plats */}
             <TabsContent value="plats">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {menuData.plats.map((item, index) => (
-                  <Card key={index} className="p-6 hover:shadow-elegant transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-background to-muted/20">
-                    <div className="flex flex-col h-full">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-lg font-bold text-navy">{item.name}</h3>
-                        <Fish className="w-5 h-5 text-gold" />
+                {menuData.plats.map((item, index) => {
+                  // Choose appropriate icon based on the dish name
+                  let IconComponent = ChefHat; // Default icon
+                  if (item.name.toLowerCase().includes('poulet') || item.name.toLowerCase().includes('pintade')) {
+                    IconComponent = Drumstick;
+                  } else if (item.name.toLowerCase().includes('lapin')) {
+                    IconComponent = Rabbit;
+                  } else if (item.name.toLowerCase().includes('agouti')) {
+                    IconComponent = Bird;
+                  } else if (item.name.toLowerCase().includes('soupe')) {
+                    IconComponent = Soup;
+                  }
+
+                  return (
+                    <Card key={index} className="p-6 hover:shadow-elegant transition-all duration-300 transform hover:scale-105 bg-gradient-to-br from-background to-muted/20">
+                      <div className="flex flex-col h-full">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="text-lg font-bold text-navy">{item.name}</h3>
+                          <IconComponent className="w-5 h-5 text-gold" />
+                        </div>
+                        <p className="text-muted-foreground text-sm mb-4 flex-grow">{item.description}</p>
+                        <div className="text-gold font-bold text-xl">{item.price}</div>
                       </div>
-                      <p className="text-muted-foreground text-sm mb-4 flex-grow">{item.description}</p>
-                      <div className="text-gold font-bold text-xl">{item.price}</div>
-                    </div>
-                  </Card>
-                ))}
+                    </Card>
+                  );
+                })}
               </div>
             </TabsContent>
 
@@ -167,14 +181,26 @@ const Gastronomies = () => {
             {/* Desserts */}
             <TabsContent value="desserts">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {menuData.desserts.map((item, index) => (
-                  <Card key={index} className="p-6 text-center hover:shadow-elegant transition-all duration-300 bg-gradient-to-br from-background to-muted/30">
-                    <Coffee className="w-8 h-8 text-gold mx-auto mb-3" />
-                    <h3 className="text-lg font-bold text-navy">{item.name}</h3>
-                    <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
-                    <div className="text-gold font-bold text-lg mt-3">{item.price}</div>
-                  </Card>
-                ))}
+                {menuData.desserts.map((item, index) => {
+                  // Choose appropriate icon based on the dessert name
+                  let IconComponent = Coffee; // Default for coffee/nespresso
+                  if (item.name.toLowerCase().includes('glace')) {
+                    IconComponent = IceCream;
+                  } else if (item.name.toLowerCase().includes('yaourt')) {
+                    IconComponent = Milk;
+                  } else if (item.name.toLowerCase().includes('fruit')) {
+                    IconComponent = Cherry;
+                  }
+
+                  return (
+                    <Card key={index} className="p-6 text-center hover:shadow-elegant transition-all duration-300 bg-gradient-to-br from-background to-muted/30">
+                      <IconComponent className="w-8 h-8 text-gold mx-auto mb-3" />
+                      <h3 className="text-lg font-bold text-navy">{item.name}</h3>
+                      <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
+                      <div className="text-gold font-bold text-lg mt-3">{item.price}</div>
+                    </Card>
+                  );
+                })}
               </div>
             </TabsContent>
 

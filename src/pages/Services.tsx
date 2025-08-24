@@ -236,7 +236,7 @@ const Services = () => {
               variant="gold" 
               size="lg"
               className="mt-12"
-              onClick={() => window.location.href = 'tel:+22507696921994'}
+              onClick={() => window.location.href = 'tel:+2250769692194'}
             >
               <Phone className="w-5 h-5 mr-2" />
               Demander un devis
