@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import servicesHero from "@/assets/services-hero.jpg";
 
 const Services = () => {
   const servicesData = [
@@ -122,10 +123,15 @@ const Services = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative h-[50vh] bg-gradient-to-br from-navy via-navy-light to-gold/30 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 to-navy-dark/80" />
+      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${servicesHero})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/70 to-navy-dark/90" />
+        </div>
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 animate-fade-in drop-shadow-2xl">
             Nos Services
           </h1>
           <p className="text-xl md:text-2xl text-white/90 animate-fade-in max-w-3xl mx-auto">

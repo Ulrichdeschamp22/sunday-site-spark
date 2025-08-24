@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone, Sparkles, Crown, Gem } from "lucide-react";
+import chambresHero from "@/assets/chambres-hero.jpg";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -97,19 +98,21 @@ const Chambres = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative h-[40vh] bg-gradient-to-br from-navy via-navy-light to-navy-dark flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy-dark/80" />
+      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${chambresHero})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/70 to-navy-dark/90" />
         </div>
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in">
+        <div className="relative z-10 text-center text-white px-4">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 animate-fade-in drop-shadow-2xl">
             Nos Chambres
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 animate-fade-in">
+          <p className="text-xl md:text-2xl text-white/90 animate-fade-in max-w-3xl mx-auto">
             Confort et élégance à la Baie des Milliardaires
           </p>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Toggle Section */}
