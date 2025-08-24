@@ -1,19 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-hotel.jpg";
+import sundayBeach1 from "@/assets/sunday-beach-1.jpg";
+import sundayBeach2 from "@/assets/sunday-beach-2.jpg";
+import sundayBeach3 from "@/assets/sunday-beach-3.jpg";
+import sundayBeach4 from "@/assets/sunday-beach-4.jpg";
+import sundayBeach5 from "@/assets/sunday-beach-5.jpg";
 import ReservationForm from "./ReservationForm";
 
 const Hero = () => {
   const [isReservationOpen, setIsReservationOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Array of images for the carousel
+  const images = [
+    heroImage,
+    sundayBeach1,
+    sundayBeach2,
+    sundayBeach3,
+    sundayBeach4,
+    sundayBeach5
+  ];
+
+  // Auto-rotate images every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <section id="accueil" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
+      {/* Background Images Carousel */}
+      <div className="absolute inset-0">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
         <div className="absolute inset-0 bg-navy/60"></div>
       </div>
 
