@@ -375,17 +375,20 @@ const ChatBot = () => {
       <div className={`fixed bottom-6 right-6 z-50 transition-all duration-500 transform ${
         isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
       }`}>
-        <Card className="w-96 h-[500px] shadow-2xl border-2 border-gold/20 bg-gradient-to-b from-white to-accent/10 backdrop-blur-sm">
+        <Card className="w-[420px] h-[650px] shadow-2xl border-2 border-gold/30 bg-white">
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-navy to-navy-light text-white rounded-t-lg">
+          <div className="p-5 bg-gradient-to-r from-navy to-navy-light text-white rounded-t-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gold rounded-full flex items-center justify-center animate-pulse">
-                  <Bot className="w-6 h-6 text-navy" />
+                <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center shadow-lg">
+                  <Bot className="w-7 h-7 text-navy" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">Hôtel Résidence Sunday</h3>
-                  <p className="text-sm opacity-90">Assistant 24/7</p>
+                  <h3 className="font-bold text-lg">Assistant Hôtel Sunday</h3>
+                  <p className="text-sm text-gold flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    En ligne 24/7 • Réponse instantanée
+                  </p>
                 </div>
               </div>
               <Button
@@ -394,33 +397,39 @@ const ChatBot = () => {
                 onClick={() => setIsOpen(false)}
                 className="text-white hover:bg-white/20 rounded-full"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               </Button>
             </div>
           </div>
 
-          {/* Questions rapides en haut */}
-          {showQuickReplies && messages.length === 1 && (
-            <div className="px-4 py-3 bg-gradient-to-r from-gold/10 to-gold-light/10 border-b border-gold/20">
-              <p className="text-xs text-center text-navy/70 font-semibold mb-2">Questions fréquentes :</p>
-              <div className="flex flex-wrap gap-1.5 justify-center">
-                {quickReplies.slice(0, 4).map((question, index) => (
+          {/* Message de bienvenue toujours visible */}
+          {messages.length === 1 && (
+            <div className="bg-gradient-to-b from-gold/10 via-gold/5 to-transparent p-4 border-b">
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gold/20">
+                <p className="font-semibold text-navy mb-2 text-center">
+                  👋 Bienvenue à l'Hôtel Résidence Sunday!
+                </p>
+                <p className="text-sm text-gray-600 text-center">
+                  Je suis votre assistant virtuel. Comment puis-je vous aider aujourd'hui?
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Questions rapides toujours visibles */}
+          {showQuickReplies && (
+            <div className="px-4 py-3 bg-gray-50 border-b">
+              <p className="text-xs text-center text-navy font-bold mb-3">
+                ⚡ Cliquez sur une question pour commencer :
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {quickReplies.map((question, index) => (
                   <button
                     key={index}
                     onClick={() => handleQuickReply(question)}
-                    className="text-xs px-2.5 py-1.5 bg-white hover:bg-gold/10 text-navy border border-gold/30 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md"
+                    className="text-xs px-3 py-2.5 bg-white hover:bg-gold/10 text-navy border-2 border-gold/30 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-md hover:border-gold text-left font-medium"
                   >
-                    {question}
-                  </button>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-1.5 justify-center mt-1.5">
-                {quickReplies.slice(4).map((question, index) => (
-                  <button
-                    key={index + 4}
-                    onClick={() => handleQuickReply(question)}
-                    className="text-xs px-2.5 py-1.5 bg-white hover:bg-gold/10 text-navy border border-gold/30 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md"
-                  >
+                    <span className="text-gold mr-1.5">•</span>
                     {question}
                   </button>
                 ))}
@@ -429,26 +438,26 @@ const ChatBot = () => {
           )}
 
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto h-80 space-y-3">
+          <div className="flex-1 p-4 overflow-y-auto bg-gray-50/50 space-y-3">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'} animate-fade-in`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl ${
+                  className={`max-w-[85%] p-4 rounded-2xl ${
                     message.isBot
-                      ? 'bg-accent/30 text-navy border border-gold/30'
+                      ? 'bg-white text-navy border border-gray-200 shadow-sm'
                       : 'bg-gradient-to-r from-gold to-gold-light text-navy shadow-md'
-                  } transition-all duration-300 hover:scale-105`}
+                  } transition-all duration-300`}
                 >
                   <div className="flex items-start space-x-2">
                     {message.isBot && (
-                      <Bot className="w-4 h-4 mt-1 text-gold flex-shrink-0" />
+                      <Bot className="w-5 h-5 mt-1 text-gold flex-shrink-0" />
                     )}
                     <p className="text-sm leading-relaxed">{message.text}</p>
                     {!message.isBot && (
-                      <User className="w-4 h-4 mt-1 text-navy flex-shrink-0" />
+                      <User className="w-5 h-5 mt-1 text-navy flex-shrink-0" />
                     )}
                   </div>
                 </div>
@@ -457,9 +466,9 @@ const ChatBot = () => {
             
             {isTyping && (
               <div className="flex justify-start animate-fade-in">
-                <div className="bg-accent/30 text-navy border border-gold/30 p-3 rounded-2xl max-w-[80%]">
+                <div className="bg-white text-navy border border-gray-200 p-4 rounded-2xl max-w-[85%] shadow-sm">
                   <div className="flex items-center space-x-2">
-                    <Bot className="w-4 h-4 text-gold" />
+                    <Bot className="w-5 h-5 text-gold" />
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-gold rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-gold rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
@@ -472,28 +481,27 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
-          <div className="p-4 border-t border-gold/20 bg-white/50 backdrop-blur-sm">
+          {/* Input amélioré */}
+          <div className="p-4 border-t-2 border-gray-100 bg-white">
             <div className="flex space-x-2">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="💬 Poser une question..."
-                className="flex-1 border-2 border-gold/30 focus:border-gold rounded-full px-4"
+                placeholder="💬 Tapez votre question ici..."
+                className="flex-1 border-2 border-gray-200 focus:border-gold rounded-lg px-4 py-3 text-sm placeholder:text-gray-400"
               />
               <Button
                 onClick={() => handleSend()}
                 disabled={!inputValue.trim()}
-                className="rounded-full w-12 h-12 bg-gradient-to-r from-gold to-gold-light hover:shadow-gold transition-all duration-300 hover:scale-110"
+                className="rounded-lg px-6 bg-gradient-to-r from-gold to-gold-light hover:shadow-gold transition-all duration-300 hover:scale-105"
               >
                 <Send className="w-5 h-5 text-navy" />
               </Button>
             </div>
             
-            
-            <p className="text-xs text-center mt-2 text-navy/60">
-              Réponses basées sur les informations de l'hôtel
+            <p className="text-xs text-center mt-3 text-gray-500">
+              Appuyez sur Entrée pour envoyer • Disponible 24h/24
             </p>
           </div>
         </Card>
