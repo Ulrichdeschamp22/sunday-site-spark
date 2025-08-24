@@ -1,121 +1,312 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Star, Shield, Wifi, Car, Coffee, Users, Plane, Heart } from "lucide-react";
+import { MapPin, Clock, Bed, Utensils, CreditCard, Ship, Users, Car, Wifi, Coffee, Calendar, Baby, PawPrint, MapPinned, Waves, Sun, Trophy, Briefcase, Phone, Banknote, Timer, Home, Globe, Heart, Sparkles } from "lucide-react";
+import { useState } from "react";
 
 const FAQ = () => {
-  const faqs = [
+  const [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
+  
+  const faqCategories = [
     {
-      icon: <Heart className="h-5 w-5 text-gold" />,
-      question: "Pourquoi choisir l'Hôtel Résidence Sunday ?",
-      answer: "✨ Découvrez l'excellence à la Baie des Milliardaires ! Un cadre exceptionnel, un service 5 étoiles disponible 24h/24, et une expérience inoubliable qui fera de votre séjour un moment magique.",
-      badge: "Expérience Premium"
+      title: "Informations Générales",
+      icon: <Home className="h-6 w-6" />,
+      color: "from-blue-500 to-cyan-500",
+      questions: [
+        {
+          icon: <MapPin className="h-5 w-5" />,
+          question: "Où est situé l'Hôtel Résidence Sunday ?",
+          answer: "L'hôtel est situé à Yopougon, Baie des Milliardaires, Abidjan, Côte d'Ivoire. Un cadre paradisiaque sur une île proche de Yopougon offrant tranquillité et sécurité.",
+          badge: "Localisation Premium"
+        },
+        {
+          icon: <Clock className="h-5 w-5" />,
+          question: "L'hôtel est-il ouvert 24h/24 et 7j/7 ?",
+          answer: "Oui, nous sommes ouverts 24h/24 et 7j/7 ! Notre équipe passionnée est toujours présente pour vous servir et faire de votre séjour une expérience inoubliable.",
+          badge: "Service Continu"
+        },
+        {
+          icon: <Phone className="h-5 w-5" />,
+          question: "Comment réserver une chambre ?",
+          answer: "Réservez facilement par téléphone ou WhatsApp au +225 07 69 69 21 94, ou directement sur place. Notre équipe est disponible 24h/24 pour vous assister.",
+          badge: "Réservation Simple"
+        }
+      ]
     },
     {
-      icon: <MapPin className="h-5 w-5 text-gold" />,
-      question: "Où nous trouver dans ce petit paradis d'Abidjan ?",
-      answer: "🏝️ Au cœur de la prestigieuse Baie des Milliardaires à Yopougon ! Un emplacement de rêve où l'élégance rencontre la tranquillité, facilement accessible et proche de tout ce qui compte.",
-      badge: "Localisation Premium"
+      title: "Hébergement & Confort",
+      icon: <Bed className="h-6 w-6" />,
+      color: "from-purple-500 to-pink-500",
+      questions: [
+        {
+          icon: <Sparkles className="h-5 w-5" />,
+          question: "Quels types de chambres proposez-vous ?",
+          answer: "Nous offrons 3 catégories : Chambre Standard (Canal+ formule accès), Chambre Standard Plus (Canal+ formule évasion), et Suite Junior (Canal+ évasion + eau chaude). Toutes sont climatisées avec petit-déjeuner inclus et accès piscine.",
+          badge: "3 Catégories"
+        },
+        {
+          icon: <Banknote className="h-5 w-5" />,
+          question: "Quels sont les tarifs pour la nuitée ?",
+          answer: "Chambre Standard : 25.000 FCFA, Chambre Standard Plus : 30.000 FCFA, Suite Junior : 40.000 FCFA. Réduction à partir de 3 jours de séjour !",
+          badge: "Tarifs Flexibles"
+        },
+        {
+          icon: <Timer className="h-5 w-5" />,
+          question: "Quelles sont les offres en journée ?",
+          answer: "Du lundi au jeudi (10h-17h) : Standard 15.000 FCFA, Standard Plus 20.000 FCFA, Suite Junior 25.000 FCFA. Parfait pour une escapade détente !",
+          badge: "Offres Journée"
+        },
+        {
+          icon: <Coffee className="h-5 w-5" />,
+          question: "Le petit-déjeuner est-il inclus ?",
+          answer: "Oui ! Le petit-déjeuner est inclus dans toutes nos formules de nuitée pour bien commencer votre journée.",
+          badge: "Petit-déj Inclus"
+        }
+      ]
     },
     {
-      icon: <Star className="h-5 w-5 text-gold" />,
-      question: "Comment réserver votre escapade de rêve ?",
-      answer: "📱 Simple comme bonjour ! Un clic sur WhatsApp (+225 07 69 69 21 94) ou notre bouton 'Réserver maintenant'. Notre équipe passionnée est là 24h/24 pour transformer votre réservation en expérience extraordinaire !",
-      badge: "Réservation Instantanée"
+      title: "Services & Activités",
+      icon: <Sun className="h-6 w-6" />,
+      color: "from-orange-500 to-red-500",
+      questions: [
+        {
+          icon: <Waves className="h-5 w-5" />,
+          question: "Quels services et loisirs sont disponibles ?",
+          answer: "Piscine, baby-foot, balançoires, tir à l'arc, restaurant & bar, terrasses et jardins privatifs, espaces de coworking, Wi-Fi gratuit, parking sécurisé, et organisation d'excursions locales.",
+          badge: "Services Premium"
+        },
+        {
+          icon: <Car className="h-5 w-5" />,
+          question: "L'hôtel dispose-t-il d'un parking sécurisé ?",
+          answer: "Oui, nous disposons d'un parking privé et sécurisé pour votre tranquillité d'esprit durant votre séjour.",
+          badge: "Parking Sécurisé"
+        },
+        {
+          icon: <Wifi className="h-5 w-5" />,
+          question: "Est-ce que le Wi-Fi est gratuit ?",
+          answer: "Oui, le Wi-Fi haut débit est gratuit dans tout l'établissement, parfait pour le travail ou les loisirs.",
+          badge: "Wi-Fi Gratuit"
+        }
+      ]
     },
     {
-      icon: <Coffee className="h-5 w-5 text-gold" />,
-      question: "Une gastronomie qui éveille vos sens ?",
-      answer: "🍽️ Absolument ! Notre restaurant vous propose un véritable voyage culinaire avec des spécialités ivoiriennes et internationales. Nos clients en parlent comme d'une 'expérience gastronomique validée' !",
-      badge: "Gastronomie d'Exception"
+      title: "Gastronomie",
+      icon: <Utensils className="h-6 w-6" />,
+      color: "from-green-500 to-emerald-500",
+      questions: [
+        {
+          icon: <Trophy className="h-5 w-5" />,
+          question: "Quels plats et boissons propose le restaurant ?",
+          answer: "Cuisine ivoirienne et internationale : poissons frais, poulet braisé, kedjenou, agouti, lapin, escargots sautés, et plus. Bar complet avec vins, champagnes et cocktails.",
+          badge: "Cuisine Variée"
+        },
+        {
+          icon: <Heart className="h-5 w-5" />,
+          question: "Quels sont les plats les plus recommandés ?",
+          answer: "Nos spécialités : Kedjenou de poulet (12.000 FCFA), Poisson frais grillé, Marmite de Pêcheur (15.000 FCFA), et notre célèbre Poulet braisé (10.000 FCFA).",
+          badge: "Spécialités Maison"
+        }
+      ]
     },
     {
-      icon: <Shield className="h-5 w-5 text-gold" />,
-      question: "Quels services premium vous attendent ?",
-      answer: "🌟 WiFi gratuit ultra-rapide, climatisation parfaite, télévision HD, restaurant gastronomique, bar chaleureux, parking ultra-sécurisé, et notre équipe dédiée 24h/24 pour anticiper vos moindres désirs !",
-      badge: "Services 5 Étoiles"
+      title: "Accès & Transport",
+      icon: <Ship className="h-6 w-6" />,
+      color: "from-teal-500 to-blue-500",
+      questions: [
+        {
+          icon: <MapPinned className="h-5 w-5" />,
+          question: "Comment se rendre à l'hôtel depuis Yopougon ?",
+          answer: "Rendez-vous à Yopougon Azito village (terminus wôrô-wôrô), descendez jusqu'au quai, puis traversée en pinasse : 2.500 FCFA aller-retour. Dernier départ 18h30.",
+          badge: "Via Yopougon"
+        },
+        {
+          icon: <Globe className="h-5 w-5" />,
+          question: "Comment se rendre à l'hôtel depuis Biétry ?",
+          answer: "Descendez jusqu'au bord de la lagune (rue après l'hôtel Wafou), traversée en bateau : 10.000 FCFA aller-retour. Dernier départ 18h30.",
+          badge: "Via Biétry"
+        },
+        {
+          icon: <Timer className="h-5 w-5" />,
+          question: "Quel est le dernier départ du bateau ?",
+          answer: "Le dernier départ (pinasse ou bateau) est à 18h30. Planifiez votre arrivée en conséquence !",
+          badge: "Horaire Important"
+        }
+      ]
     },
     {
-      icon: <Clock className="h-5 w-5 text-gold" />,
-      question: "Toujours là pour vous, vraiment ?",
-      answer: "⏰ 24h/24 et 7j/7 ! Parce que l'excellence ne connaît pas d'horaires. Notre équipe passionnée est toujours présente pour faire de chaque moment un souvenir précieux.",
-      badge: "Service Continu"
+      title: "Paiement & Réservation",
+      icon: <CreditCard className="h-6 w-6" />,
+      color: "from-indigo-500 to-purple-500",
+      questions: [
+        {
+          icon: <Banknote className="h-5 w-5" />,
+          question: "Quels moyens de paiement sont acceptés ?",
+          answer: "Espèces (FCFA), Mobile Money (Wave, Orange Money, MTN Money, Moov Money), et cartes bancaires selon disponibilité.",
+          badge: "Paiements Flexibles"
+        },
+        {
+          icon: <Calendar className="h-5 w-5" />,
+          question: "Des réductions sont-elles offertes pour les longs séjours ?",
+          answer: "Oui ! Des réductions attractives sont appliquées automatiquement pour les séjours de 3 jours ou plus.",
+          badge: "Réductions Long Séjour"
+        }
+      ]
     },
     {
-      icon: <Users className="h-5 w-5 text-gold" />,
-      question: "Parfait pour les professionnels en mission ?",
-      answer: "💼 Transformez vos déplacements professionnels en moments privilégiés ! Notre cadre paisible et nos services premium créent l'environnement parfait pour allier travail et bien-être.",
-      badge: "Business Premium"
-    },
-    {
-      icon: <Car className="h-5 w-5 text-gold" />,
-      question: "Votre véhicule en sécurité absolue ?",
-      answer: "🚗 Parking privé ultra-sécurisé ! Votre tranquillité d'esprit commence dès votre arrivée. Concentrez-vous sur votre détente, nous nous occupons du reste.",
-      badge: "Sécurité Maximale"
-    },
-    {
-      icon: <Plane className="h-5 w-5 text-gold" />,
-      question: "Comment rejoindre facilement notre havre de paix ?",
-      answer: "✈️ Depuis l'aéroport, laissez-nous organiser votre transfert VIP ou prenez un taxi direction Yopougon-Baie des Milliardaires. Le voyage vers l'exception commence dès votre atterrissage !",
-      badge: "Accès Privilégié"
-    },
-    {
-      icon: <Heart className="h-5 w-5 text-gold" />,
-      question: "Des événements et groupes exceptionnels ?",
-      answer: "🎉 Créons ensemble des moments inoubliables ! Que ce soit pour des événements intimes ou des groupes, notre cadre enchanteur et notre équipe experte transformeront vos projets en souvenirs magiques.",
-      badge: "Événements Sur-Mesure"
+      title: "Familles & Groupes",
+      icon: <Users className="h-6 w-6" />,
+      color: "from-pink-500 to-rose-500",
+      questions: [
+        {
+          icon: <Baby className="h-5 w-5" />,
+          question: "L'hôtel est-il adapté aux familles avec enfants ?",
+          answer: "Absolument ! Avec notre piscine, aires de jeux (balançoires), baby-foot et espaces sécurisés, les familles sont les bienvenues.",
+          badge: "Family Friendly"
+        },
+        {
+          icon: <PawPrint className="h-5 w-5" />,
+          question: "Les animaux de compagnie sont-ils acceptés ?",
+          answer: "Pour cette information, merci de nous contacter directement au +225 07 69 69 21 94 pour discuter de vos besoins spécifiques.",
+          badge: "Nous Consulter"
+        },
+        {
+          icon: <Briefcase className="h-5 w-5" />,
+          question: "Peut-on organiser des événements à l'hôtel ?",
+          answer: "Oui ! Nous accueillons mariages, anniversaires, événements d'entreprise et réunions professionnelles dans notre cadre exceptionnel.",
+          badge: "Événements Sur-Mesure"
+        }
+      ]
     }
   ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-secondary via-background to-secondary/50 relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNGRkQ3MDAiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50"></div>
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 animate-pulse"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-navy/10 rounded-full blur-3xl animate-float-delayed"></div>
+      </div>
       
       <div className="container mx-auto px-4 relative">
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-6 px-6 py-2 text-gold border-gold/30 bg-gold/5">
-            ✨ Tout ce que vous voulez savoir
+        {/* Header Section */}
+        <div className="text-center mb-16 animate-fade-in">
+          <Badge 
+            variant="outline" 
+            className="mb-6 px-6 py-2 text-gold border-gold/30 bg-gold/5 backdrop-blur-sm animate-scale-in"
+          >
+            <Sparkles className="h-4 w-4 mr-2" />
+            Questions Fréquentes
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-navy via-gold to-navy bg-clip-text text-transparent">
-            Vos Questions, Nos Réponses
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-navy via-gold to-navy bg-clip-text text-transparent animate-fade-in">
+            Tout ce que vous devez savoir
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Découvrez pourquoi l'Hôtel Résidence Sunday est le choix privilégié des voyageurs exigeants à Abidjan
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in">
+            Explorez nos réponses détaillées aux questions les plus fréquentes de nos clients
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
-          <Card className="border-none shadow-[0_20px_60px_-15px_rgba(255,215,0,0.2)] bg-card/80 backdrop-blur-sm p-8">
-            <Accordion type="single" collapsible className="w-full space-y-4">
-              {faqs.map((faq, index) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`} 
-                  className="border border-gold/10 rounded-xl px-6 py-2 bg-gradient-to-r from-background/50 to-secondary/30 hover:from-gold/5 hover:to-gold/10 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                >
-                  <AccordionTrigger className="text-left text-navy hover:text-gold transition-all duration-300 py-6 [&[data-state=open]]:text-gold">
-                    <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 p-2 rounded-full bg-gold/10 group-hover:bg-gold/20 transition-colors">
-                        {faq.icon}
-                      </div>
-                      <div className="flex flex-col items-start gap-2">
-                        <span className="font-bold text-lg">{faq.question}</span>
-                        <Badge variant="secondary" className="text-xs bg-gold/20 text-gold border-gold/30">
-                          {faq.badge}
-                        </Badge>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pt-2 pb-6">
-                    <div className="ml-14 text-muted-foreground leading-relaxed text-base bg-gradient-to-r from-background to-secondary/20 rounded-lg p-4 border-l-4 border-gold/30">
-                      {faq.answer}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </Card>
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+          {faqCategories.map((category, categoryIndex) => (
+            <Card 
+              key={categoryIndex}
+              className={`group cursor-pointer border-2 border-transparent hover:border-gold/30 transition-all duration-500 animate-scale-in bg-gradient-to-br ${category.color} p-1`}
+              style={{ animationDelay: `${categoryIndex * 100}ms` }}
+            >
+              <div className="bg-card rounded-lg p-6 h-full">
+                <div className="flex flex-col items-center text-center space-y-3">
+                  <div className="p-3 rounded-full bg-gradient-to-br from-gold/20 to-gold/10 group-hover:scale-110 transition-transform">
+                    {category.icon}
+                  </div>
+                  <h3 className="font-bold text-lg">{category.title}</h3>
+                  <Badge variant="secondary" className="text-xs">
+                    {category.questions.length} questions
+                  </Badge>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* FAQ Sections */}
+        <div className="space-y-12">
+          {faqCategories.map((category, categoryIndex) => (
+            <div 
+              key={categoryIndex}
+              className="animate-fade-in"
+              style={{ animationDelay: `${categoryIndex * 150}ms` }}
+            >
+              {/* Category Header */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} text-white shadow-lg`}>
+                  {category.icon}
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+                  <p className="text-muted-foreground">
+                    {category.questions.length} questions dans cette catégorie
+                  </p>
+                </div>
+              </div>
+
+              {/* Questions Accordion */}
+              <Card className="border-none shadow-xl bg-card/90 backdrop-blur-sm overflow-hidden">
+                <Accordion type="single" collapsible className="w-full">
+                  {category.questions.map((faq, faqIndex) => {
+                    const globalIndex = `${categoryIndex}-${faqIndex}`;
+                    const isHovered = hoveredIndex === globalIndex;
+                    
+                    return (
+                      <AccordionItem 
+                        key={faqIndex} 
+                        value={globalIndex}
+                        className="border-b border-border/50 last:border-0"
+                        onMouseEnter={() => setHoveredIndex(globalIndex)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                      >
+                        <AccordionTrigger 
+                          className={`text-left px-6 py-5 hover:bg-gold/5 transition-all duration-300 ${
+                            isHovered ? 'bg-gold/5' : ''
+                          }`}
+                        >
+                          <div className="flex items-start gap-4 w-full pr-4">
+                            <div className={`flex-shrink-0 p-2 rounded-lg transition-all duration-300 ${
+                              isHovered ? 'bg-gold/20 scale-110' : 'bg-muted'
+                            }`}>
+                              <div className={`${isHovered ? 'text-gold' : 'text-muted-foreground'}`}>
+                                {faq.icon}
+                              </div>
+                            </div>
+                            <div className="flex-1 space-y-2">
+                              <p className="font-semibold text-base md:text-lg">
+                                {faq.question}
+                              </p>
+                              <Badge 
+                                variant="outline" 
+                                className={`text-xs transition-all duration-300 ${
+                                  isHovered ? 'bg-gold/20 text-gold border-gold/30' : ''
+                                }`}
+                              >
+                                {faq.badge}
+                              </Badge>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-6 pb-5">
+                          <div className="ml-14 p-4 rounded-lg bg-gradient-to-r from-muted/50 to-muted/30 border-l-4 border-gold/50">
+                            <p className="text-muted-foreground leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              </Card>
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-16">
