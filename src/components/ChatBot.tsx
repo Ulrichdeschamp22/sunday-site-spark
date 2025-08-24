@@ -23,7 +23,20 @@ const ChatBot = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showQuickReplies, setShowQuickReplies] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Questions rapides basées sur la FAQ
+  const quickReplies = [
+    "Quels sont vos tarifs ?",
+    "Comment réserver une chambre ?",
+    "Où êtes-vous situés ?",
+    "Quels services proposez-vous ?",
+    "Comment venir depuis Yopougon ?",
+    "Avez-vous une piscine ?",
+    "Proposez-vous un service de restauration ?",
+    "Acceptez-vous le mobile money ?"
+  ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -302,12 +315,13 @@ const ChatBot = () => {
       "Exemples: \"Quels sont vos tarifs?\", \"Comment réserver?\", \"Avez-vous une piscine?\"";
   };
 
-  const handleSend = () => {
-    if (!inputValue.trim()) return;
+  const handleSend = (text?: string) => {
+    const messageText = text || inputValue;
+    if (!messageText.trim()) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue,
+      text: messageText,
       isBot: false,
       timestamp: new Date()
     };
@@ -315,18 +329,23 @@ const ChatBot = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
+    setShowQuickReplies(false); // Masquer les questions rapides après envoi
 
     // Simulation d'une réponse avec délai
     setTimeout(() => {
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: getKnowledgeBaseResponse(inputValue),
+        text: getKnowledgeBaseResponse(messageText),
         isBot: true,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
     }, 1500);
+  };
+
+  const handleQuickReply = (question: string) => {
+    handleSend(question);
   };
 
   return (
@@ -432,13 +451,32 @@ const ChatBot = () => {
                 className="flex-1 border-2 border-gold/30 focus:border-gold rounded-full px-4"
               />
               <Button
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={!inputValue.trim()}
                 className="rounded-full w-12 h-12 bg-gradient-to-r from-gold to-gold-light hover:shadow-gold transition-all duration-300 hover:scale-110"
               >
                 <Send className="w-5 h-5 text-navy" />
               </Button>
             </div>
+            
+            {/* Questions rapides */}
+            {showQuickReplies && messages.length === 1 && (
+              <div className="mt-3 space-y-2">
+                <p className="text-xs text-center text-navy/60 font-semibold">Questions fréquentes :</p>
+                <div className="flex flex-wrap gap-2">
+                  {quickReplies.map((question, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleQuickReply(question)}
+                      className="text-xs px-3 py-2 bg-gradient-to-r from-gold/10 to-gold-light/10 hover:from-gold/20 hover:to-gold-light/20 text-navy border border-gold/30 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-sm"
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            
             <p className="text-xs text-center mt-2 text-navy/60">
               Réponses basées sur les informations de l'hôtel
             </p>
