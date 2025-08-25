@@ -1,37 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
-
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: "Adresse",
-      content: "Abidjan, Yopougon\nBaie des Milliardaires\nCôte d'Ivoire",
-      action: () => window.open('https://maps.google.com/?q=Baie+des+Milliardaires+Yopougon+Abidjan', '_blank')
-    },
-    {
-      icon: Phone,
-      title: "Téléphone",
-      content: "+225 07 69 69 21 94",
-      action: () => document.querySelector<HTMLAnchorElement>('#phone-link')?.click()
-    },
-    {
-      icon: Clock,
-      title: "Horaires",
-      content: "Ouvert 24h/24\n7 jours sur 7\nAccueil permanent",
-      action: null
-    },
-    {
-      icon: MessageCircle,
-      title: "WhatsApp",
-      content: "Contactez-nous\ndirectement",
-      action: () => window.open('https://wa.me/2250769692194', '_blank')
-    }
-  ];
-
-  return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-background to-navy">
+  const contactInfo = [{
+    icon: MapPin,
+    title: "Adresse",
+    content: "Abidjan, Yopougon\nBaie des Milliardaires\nCôte d'Ivoire",
+    action: () => window.open('https://maps.google.com/?q=Baie+des+Milliardaires+Yopougon+Abidjan', '_blank')
+  }, {
+    icon: Phone,
+    title: "Téléphone",
+    content: "+225 07 69 69 21 94",
+    action: () => document.querySelector<HTMLAnchorElement>('#phone-link')?.click()
+  }, {
+    icon: Clock,
+    title: "Horaires",
+    content: "Ouvert 24h/24\n7 jours sur 7\nAccueil permanent",
+    action: null
+  }, {
+    icon: MessageCircle,
+    title: "WhatsApp",
+    content: "Contactez-nous\ndirectement",
+    action: () => window.open('https://wa.me/2250769692194', '_blank')
+  }];
+  return <section id="contact" className="py-20 bg-gradient-to-b from-background to-navy bg-[#000303]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-navy to-gold bg-clip-text text-transparent">
@@ -43,12 +35,7 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {contactInfo.map((info, index) => (
-            <Card 
-              key={index} 
-              className={`text-center border-gold/20 shadow-elegant hover:shadow-gold transition-all duration-300 transform hover:scale-105 ${info.action ? 'cursor-pointer' : ''}`}
-              onClick={info.action || undefined}
-            >
+          {contactInfo.map((info, index) => <Card key={index} className={`text-center border-gold/20 shadow-elegant hover:shadow-gold transition-all duration-300 transform hover:scale-105 ${info.action ? 'cursor-pointer' : ''}`} onClick={info.action || undefined}>
               <CardHeader>
                 <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gold to-gold-light rounded-full flex items-center justify-center">
                   <info.icon className="w-8 h-8 text-navy" />
@@ -60,8 +47,7 @@ const Contact = () => {
                   {info.content}
                 </p>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* CTA Section */}
@@ -74,21 +60,12 @@ const Contact = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              variant="whatsapp" 
-              size="lg" 
-              className="text-lg px-8 py-4"
-              onClick={() => window.open('https://wa.me/2250769692194?text=Bonjour, je souhaite réserver une chambre à l\'Hôtel Résidence Sunday', '_blank')}
-            >
+            <Button variant="whatsapp" size="lg" className="text-lg px-8 py-4" onClick={() => window.open('https://wa.me/2250769692194?text=Bonjour, je souhaite réserver une chambre à l\'Hôtel Résidence Sunday', '_blank')}>
               <MessageCircle className="w-5 h-5" />
               Réserver via WhatsApp
             </Button>
             <a href="tel:+2250769692194" id="phone-link">
-              <Button 
-                variant="gold" 
-                size="lg" 
-                className="text-lg px-8 py-4"
-              >
+              <Button variant="gold" size="lg" className="text-lg px-8 py-4">
                 <Phone className="w-5 h-5" />
                 Appeler maintenant
               </Button>
@@ -105,16 +82,12 @@ const Contact = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="w-full h-64 bg-gradient-to-br from-gold-light to-gold flex items-center justify-center">
+              <div className="w-full h-64 bg-gradient-to-br from-gold-light to-gold flex items-center justify-center bg-blue-100">
                 <div className="text-center text-navy">
                   <MapPin className="w-12 h-12 mx-auto mb-4" />
                   <p className="text-lg font-semibold">Baie des Milliardaires</p>
                   <p>Yopougon, Abidjan</p>
-                  <Button 
-                    variant="hero" 
-                    className="mt-4"
-                    onClick={() => window.open('https://maps.google.com/?q=Baie+des+Milliardaires+Yopougon+Abidjan', '_blank')}
-                  >
+                  <Button variant="hero" className="mt-4" onClick={() => window.open('https://maps.google.com/?q=Baie+des+Milliardaires+Yopougon+Abidjan', '_blank')}>
                     Voir sur Google Maps
                   </Button>
                 </div>
@@ -123,8 +96,6 @@ const Contact = () => {
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
