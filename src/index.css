@@ -104,6 +104,11 @@ All colors MUST be HSL.
   }
 }
 
+/* Animation delay utility */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
 @layer base {
   * {
     @apply border-border;
