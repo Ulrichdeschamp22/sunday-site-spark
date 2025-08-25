@@ -281,7 +281,6 @@ const Chambres = () => {
               <Button
                 variant="gold"
                 size="lg"
-                onClick={handleCallHotel}
                 className="flex items-center justify-center gap-3 py-6 w-full"
               >
                 <Phone className="w-5 h-5" />
