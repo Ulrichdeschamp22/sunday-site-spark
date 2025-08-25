@@ -21,6 +21,12 @@ const ChatBot = () => {
       timestamp: new Date()
     }
   ]);
+  
+  // Expose chatbot state globally for WhatsApp button
+  useEffect(() => {
+    const event = new CustomEvent('chatbotToggle', { detail: { isOpen } });
+    window.dispatchEvent(event);
+  }, [isOpen]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showQuickReplies, setShowQuickReplies] = useState(true);

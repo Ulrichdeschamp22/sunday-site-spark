@@ -1,9 +1,28 @@
 import { MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const WhatsAppButton = () => {
+  const [isChatBotOpen, setIsChatBotOpen] = useState(false);
   const whatsappNumber = "22507696921994";
   const message = "Bonjour, je souhaite avoir des informations sur l'Hôtel Résidence Sunday.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  
+  useEffect(() => {
+    const handleChatbotToggle = (event: CustomEvent) => {
+      setIsChatBotOpen(event.detail.isOpen);
+    };
+    
+    window.addEventListener('chatbotToggle', handleChatbotToggle as EventListener);
+    
+    return () => {
+      window.removeEventListener('chatbotToggle', handleChatbotToggle as EventListener);
+    };
+  }, []);
+  
+  // Hide WhatsApp button when chatbot is open
+  if (isChatBotOpen) {
+    return null;
+  }
 
   return (
     <a
