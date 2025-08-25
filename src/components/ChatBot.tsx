@@ -77,12 +77,12 @@ const ChatBot = () => {
           }
         },
         response: () => {
-          return `🏷️ **Nos Tarifs Chambres** (Excellent rapport qualité-prix!)\n\n` +
-            `📌 **Chambre Standard**: 25.000 FCFA/nuit | 15.000 FCFA/journée\n` +
-            `📌 **Chambre Standard Plus**: 30.000 FCFA/nuit | 20.000 FCFA/journée\n` +
-            `📌 **Suite Junior**: 40.000 FCFA/nuit | 25.000 FCFA/journée\n\n` +
+          return `🏷️ Nos Tarifs Chambres (Excellent rapport qualité-prix!)\n\n` +
+            `📌 Chambre Standard: 25.000 FCFA/nuit | 15.000 FCFA/journée\n` +
+            `📌 Chambre Standard Plus: 30.000 FCFA/nuit | 20.000 FCFA/journée\n` +
+            `📌 Suite Junior: 40.000 FCFA/nuit | 25.000 FCFA/journée\n\n` +
             `✨ Toutes incluent: Petit-déjeuner, Accès piscine, Canal+ et Climatisation\n` +
-            `🎁 **RÉDUCTION à partir de 3 jours de séjour!**\n\n` +
+            `🎁 RÉDUCTION à partir de 3 jours de séjour!\n\n` +
             `📞 Réservez: +225 07 69 69 21 94 (WhatsApp disponible)`;
         }
       },
@@ -90,17 +90,17 @@ const ChatBot = () => {
       // Réservations
       reservations: {
         keywords: ['reserver', 'reservation', 'booking', 'disponibilite', 'libre', 'comment reserver', 'je veux reserver', 'j aimerais reserver'],
-        response: () => "🎯 **Pour réserver votre séjour:**\n📱 WhatsApp/Téléphone: +225 07 69 69 21 94\n⏰ Disponible 24h/24 et 7j/7\n✅ Réservation simple et rapide\n💳 Paiement: Espèces, Mobile Money (Wave, Orange, MTN, Moov) ou Carte bancaire\n\n*Cliquez sur le bouton 'Réserver maintenant' pour remplir notre formulaire de réservation en ligne!*"
+        response: () => "🎯 Pour réserver votre séjour:\n📱 WhatsApp/Téléphone: +225 07 69 69 21 94\n⏰ Disponible 24h/24 et 7j/7\n✅ Réservation simple et rapide\n💳 Paiement: Espèces, Mobile Money (Wave, Orange, MTN, Moov) ou Carte bancaire\n\nCliquez sur le bouton 'Réserver maintenant' pour remplir notre formulaire de réservation en ligne!"
       },
       
       // Chambres et équipements
       rooms: {
         keywords: ['chambre', 'room', 'suite', 'hebergement', 'logement', 'dormir', 'lit', 'equipement chambre', 'confort'],
-        response: () => "🛏️ **Nos Types de Chambres:**\n\n" +
-          "✨ **Chambre Standard** - Idéale pour voyageurs solo ou couples\n" +
-          "✨ **Chambre Standard Plus** - Plus spacieuse avec Canal+ évasion\n" +
-          "✨ **Suite Junior** - Luxueuse avec eau chaude\n\n" +
-          "**Équipements dans toutes les chambres:**\n" +
+        response: () => "🛏️ Nos Types de Chambres:\n\n" +
+          "✨ Chambre Standard - Idéale pour voyageurs solo ou couples\n" +
+          "✨ Chambre Standard Plus - Plus spacieuse avec Canal+ évasion\n" +
+          "✨ Suite Junior - Luxueuse avec eau chaude\n\n" +
+          "Équipements dans toutes les chambres:\n" +
           "✅ Climatisation\n✅ Wi-Fi gratuit haut débit\n✅ TV écran plat avec Canal+\n" +
           "✅ Salle de bain privative\n✅ Service de ménage quotidien\n✅ Accès piscine"
       },
@@ -108,13 +108,13 @@ const ChatBot = () => {
       // Localisation et accès
       location: {
         keywords: ['adresse', 'ou', 'localisation', 'situe', 'emplacement', 'comment venir', 'se rendre', 'aller', 'acces', 'transport', 'bateau', 'pinasse', 'traversee', 'azito', 'bietry', 'yopougon'],
-        response: () => "📍 **Localisation:** Yopougon, Baie des Milliardaires, Abidjan\n\n" +
-          "🚤 **Accès depuis Yopougon:**\n" +
+        response: () => "📍 Localisation: Yopougon, Baie des Milliardaires, Abidjan\n\n" +
+          "🚤 Accès depuis Yopougon:\n" +
           "• Rendez-vous à Yopougon Azito village (terminus wôrô-wôrô)\n" +
           "• Descendre jusqu'au bord de la lagune\n" +
           "• Traversée en pinasse: 2.500 FCFA aller-retour\n" +
           "• Dernier départ: 18h30\n\n" +
-          "⛵ **Accès depuis Biétry:**\n" +
+          "⛵ Accès depuis Biétry:\n" +
           "• Descendre jusqu'au bord lagune (après hôtel Wafou)\n" +
           "• Traversée en bateau: 10.000 FCFA aller-retour\n" +
           "• Dernier départ: 18h30\n\n" +
@@ -131,36 +131,36 @@ const ChatBot = () => {
           boissons: "Bières (1.000-1.500), Vins (8-15.000), Champagne LP/Moët (40-45.000)",
           desserts: "Glaces, Yaourt, Fruits de saison (1.000)"
         },
-        response: () => "🍽️ **Restaurant & Bar Sur Place**\n\n" +
-          "🎯 **Nos Spécialités:**\n" +
+        response: () => "🍽️ Restaurant & Bar Sur Place\n\n" +
+          "🎯 Nos Spécialités:\n" +
           "• Poisson frais grillé (12.000-20.000 FCFA)\n" +
           "• Kedjenou de poulet/pintade (12.000 FCFA)\n" +
           "• Agouti braisé (15.000 FCFA)\n" +
           "• Poulet braisé (10.000 FCFA)\n" +
           "• Marmite de pêcheur (15.000 FCFA)\n\n" +
-          "🥗 **Entrées:** 5.000-6.000 FCFA\n" +
-          "🍚 **Accompagnements:** Attiéké, Alloco, Frites (1.000 FCFA)\n" +
-          "🍷 **Cave à vins & Champagnes disponibles**\n" +
-          "🍺 **Bières locales et importées**\n\n" +
+          "🥗 Entrées: 5.000-6.000 FCFA\n" +
+          "🍚 Accompagnements: Attiéké, Alloco, Frites (1.000 FCFA)\n" +
+          "🍷 Cave à vins & Champagnes disponibles\n" +
+          "🍺 Bières locales et importées\n\n" +
           "✨ Cuisine locale et internationale de qualité!"
       },
       
       // Services et loisirs
       services: {
         keywords: ['service', 'equipement', 'parking', 'piscine', 'activite', 'loisir', 'detente', 'sport', 'jeu', 'animation', 'navette', 'taxi', 'blanchisserie', 'excursion'],
-        response: () => "🌟 **Services & Équipements Premium:**\n\n" +
-          "🏊 **Loisirs:**\n• Piscine extérieure\n• Baby-foot\n• Balançoires\n• Tir à l'arc\n• Terrasses et jardins privatifs\n\n" +
-          "🚗 **Services Pratiques:**\n• Parking privé sécurisé gratuit\n• Service navette/taxi sur demande\n• Réception 24h/24\n• Service de blanchisserie\n• Wi-Fi haut débit gratuit\n\n" +
-          "💼 **Business:**\n• Espaces de coworking\n• Organisation d'événements\n\n" +
+        response: () => "🌟 Services & Équipements Premium:\n\n" +
+          "🏊 Loisirs:\n• Piscine extérieure\n• Baby-foot\n• Balançoires\n• Tir à l'arc\n• Terrasses et jardins privatifs\n\n" +
+          "🚗 Services Pratiques:\n• Parking privé sécurisé gratuit\n• Service navette/taxi sur demande\n• Réception 24h/24\n• Service de blanchisserie\n• Wi-Fi haut débit gratuit\n\n" +
+          "💼 Business:\n• Espaces de coworking\n• Organisation d'événements\n\n" +
           "🌴 Organisation d'excursions locales sur demande"
       },
       
       // Paiements
       payment: {
         keywords: ['paiement', 'payer', 'mobile money', 'orange money', 'mtn', 'wave', 'moov', 'carte', 'espece', 'reglement'],
-        response: () => "💳 **Moyens de Paiement Acceptés:**\n\n" +
+        response: () => "💳 Moyens de Paiement Acceptés:\n\n" +
           "💵 Espèces (FCFA)\n" +
-          "📱 **Mobile Money:**\n• Wave\n• Orange Money\n• MTN Money\n• Moov Money\n" +
+          "📱 Mobile Money:\n• Wave\n• Orange Money\n• MTN Money\n• Moov Money\n" +
           "💳 Carte bancaire\n\n" +
           "✅ Paiement sécurisé et facile!"
       },
@@ -168,22 +168,23 @@ const ChatBot = () => {
       // Horaires
       hours: {
         keywords: ['horaire', 'ouvert', 'ferme', 'heure', 'check in', 'check out', 'arrivee', 'depart'],
-        response: () => "⏰ **Horaires & Disponibilité:**\n\n" +
-          "🏨 Hôtel ouvert **24h/24 et 7j/7**\n" +
-          "✅ Check-in: À partir de **11h**\n" +
-          "✅ Check-out: Avant **11h le lendemain**\n\n" +
+        response: () => "⏰ Horaires & Disponibilité:\n\n" +
+          "🏨 Hôtel ouvert 24h/24 et 7j/7\n" +
+          "✅ Check-in: À partir de 11h\n" +
+          "✅ Check-out: Avant 11h le lendemain\n\n" +
           "📞 Réception disponible 24h/24\n" +
-          "🚤 Dernier bateau/pinasse: **18h30**"
+          "🚤 Dernier bateau/pinasse: 18h30"
       },
       
       // Événements et séminaires
       events: {
         keywords: ['evenement', 'seminaire', 'conference', 'reunion', 'mariage', 'anniversaire', 'fete', 'celebration', 'entreprise', 'formation', 'colloque'],
-        response: () => "🎉 **Organisation d'Événements:**\n\n" +
-          "✨ **Nous accueillons:**\n" +
+        response: () => "🎉 Organisation d'Événements:\n\n" +
+          "✨ Nous accueillons:\n" +
           "• Séminaires d'entreprise\n• Conférences et formations\n" +
-          "• Mariages et anniversaires\n• Réunions d'affaires\n• Lancements de produits\n• Assemblées générales\n\n" +
-          "**Nos atouts:**\n" +
+          "• Mariages et anniversaires\n• Réunions d'affaires\n" +
+          "• Lancements de produits\n• Assemblées générales\n\n" +
+          "Nos atouts:\n" +
           "✅ Salles modulables climatisées\n" +
           "✅ Wi-Fi haut débit\n" +
           "✅ Restauration sur mesure\n" +
@@ -196,19 +197,19 @@ const ChatBot = () => {
       // Avis clients
       testimonials: {
         keywords: ['avis', 'temoignage', 'commentaire', 'opinion', 'experience', 'satisfaction', 'recommandation', 'note', 'evaluation'],
-        response: () => "⭐ **Avis de nos Clients Satisfaits:**\n\n" +
-          "💬 **Keti Mia:** *\"Très bel accueil, cadre au top ! Rapport qualité prix excellent ! Très très satisfaite.\"*\n\n" +
-          "💬 **Brice-Roland Kouassi:** *\"Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, accueil chaleureux, on se sent en famille et en sécurité.\"*\n\n" +
-          "💬 **Kouadio Serge:** *\"Les chambres sont spacieuses, modernes et incroyablement confortables. Se détendre au bord de la piscine est un vrai bonheur !\"*\n\n" +
-          "💬 **N'Guessan Christophe:** *\"Chambres lumineuses, propres et ultra-confortables. Se réveiller et profiter de la piscine est un vrai plaisir.\"*\n\n" +
+        response: () => "⭐ Avis de nos Clients Satisfaits:\n\n" +
+          "💬 Keti Mia: \"Très bel accueil, cadre au top ! Rapport qualité prix excellent ! Très très satisfaite.\"\n\n" +
+          "💬 Brice-Roland Kouassi: \"Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, accueil chaleureux, on se sent en famille et en sécurité.\"\n\n" +
+          "💬 Kouadio Serge: \"Les chambres sont spacieuses, modernes et incroyablement confortables. Se détendre au bord de la piscine est un vrai bonheur !\"\n\n" +
+          "💬 N'Guessan Christophe: \"Chambres lumineuses, propres et ultra-confortables. Se réveiller et profiter de la piscine est un vrai plaisir.\"\n\n" +
           "🌟 Rejoignez nos clients satisfaits!"
       },
       
       // Contact
       contact: {
         keywords: ['contact', 'telephone', 'whatsapp', 'appeler', 'joindre', 'numero', 'coordonnees'],
-        response: () => "📞 **Contactez-nous:**\n\n" +
-          "📱 Téléphone & WhatsApp: **+225 07 69 69 21 94**\n" +
+        response: () => "📞 Contactez-nous:\n\n" +
+          "📱 Téléphone & WhatsApp: +225 07 69 69 21 94\n" +
           "⏰ Disponible 24h/24 et 7j/7\n" +
           "📍 Yopougon, Baie des Milliardaires, Abidjan\n\n" +
           "💬 N'hésitez pas à nous contacter pour toute question ou réservation!"
@@ -217,13 +218,13 @@ const ChatBot = () => {
       // WiFi et connectivité
       wifi: {
         keywords: ['wifi', 'internet', 'connexion', 'reseau', 'connectivite'],
-        response: () => "📶 **Wi-Fi Gratuit Haut Débit**\n\n✅ Disponible dans toutes les chambres\n✅ Disponible dans tous les espaces communs\n✅ Connexion rapide et stable\n✅ Idéal pour le télétravail\n✅ Streaming et visioconférence sans problème"
+        response: () => "📶 Wi-Fi Gratuit Haut Débit\n\n✅ Disponible dans toutes les chambres\n✅ Disponible dans tous les espaces communs\n✅ Connexion rapide et stable\n✅ Idéal pour le télétravail\n✅ Streaming et visioconférence sans problème"
       },
       
       // Familles et enfants
       family: {
         keywords: ['famille', 'enfant', 'bebe', 'familial', 'kid', 'parents'],
-        response: () => "👨‍👩‍👧‍👦 **Hôtel Familial par Excellence!**\n\n" +
+        response: () => "👨‍👩‍👧‍👦 Hôtel Familial par Excellence!\n\n" +
           "✅ Chambres spacieuses pour familles\n" +
           "✅ Cadre sécurisé et paisible\n" +
           "✅ Piscine adaptée aux enfants\n" +
@@ -288,14 +289,14 @@ const ChatBot = () => {
     
     // Questions sur les réductions et offres spéciales
     if (lowerQuestion.includes('reduction') || lowerQuestion.includes('promotion') || lowerQuestion.includes('offre')) {
-      return "🎁 **Offres Spéciales:**\n\n✨ **RÉDUCTION pour séjours de 3 jours et plus!**\n\n" +
+      return "🎁 Offres Spéciales:\n\n✨ RÉDUCTION pour séjours de 3 jours et plus!\n\n" +
         "Contactez-nous pour connaître nos offres du moment:\n📞 +225 07 69 69 21 94\n\n" +
         "Nous proposons régulièrement des tarifs préférentiels pour:\n• Les séjours longue durée\n• Les groupes\n• Les événements d'entreprise";
     }
     
     // Questions sur la sécurité
     if (lowerQuestion.includes('securite') || lowerQuestion.includes('securise') || lowerQuestion.includes('sur')) {
-      return "🔒 **Sécurité & Tranquillité:**\n\n" +
+      return "🔒 Sécurité & Tranquillité:\n\n" +
         "✅ Établissement entièrement sécurisé 24h/24\n" +
         "✅ Parking privé surveillé\n" +
         "✅ Cadre paisible sur une île privée\n" +
@@ -306,7 +307,7 @@ const ChatBot = () => {
     
     // Réponse par défaut enrichie
     return "💬 Je suis l'assistant virtuel de l'Hôtel Résidence Sunday, disponible 24h/24 pour répondre à toutes vos questions!\n\n" +
-      "**Voici ce que je peux vous dire sur:**\n" +
+      "Voici ce que je peux vous dire sur:\n" +
       "🏨 Nos chambres et tarifs\n" +
       "📅 Les réservations\n" +
       "🍽️ Notre restaurant et menu\n" +
@@ -314,7 +315,7 @@ const ChatBot = () => {
       "📍 Comment nous rejoindre\n" +
       "💳 Les moyens de paiement\n" +
       "🎉 L'organisation d'événements\n\n" +
-      "**Posez-moi votre question plus précisément** et je vous donnerai tous les détails!\n\n" +
+      "Posez-moi votre question plus précisément et je vous donnerai tous les détails!\n\n" +
       "Exemples: \"Quels sont vos tarifs?\", \"Comment réserver?\", \"Avez-vous une piscine?\"";
   };
 
