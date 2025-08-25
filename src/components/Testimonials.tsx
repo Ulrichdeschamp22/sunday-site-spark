@@ -10,7 +10,22 @@ const Testimonials = () => {
     },
     {
       name: "Brice-Roland Kouassi",
-      review: "Le meilleur endroit en ce moment. Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, service chaleureux, on se sent en famille et en sécurité. Je recommande vivement !",
+      review: "Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, accueil chaleureux, on se sent en famille et en sécurité.",
+      rating: 5
+    },
+    {
+      name: "Kouadio Serge",
+      review: "Les chambres sont spacieuses, modernes et incroyablement confortables. Après une longue journée, se détendre au bord de la piscine est un vrai bonheur !",
+      rating: 5
+    },
+    {
+      name: "Kouassi Didier",
+      review: "Le confort des chambres et la qualité des services rendent le séjour vraiment agréable. La piscine est un vrai plus pour se relaxer.",
+      rating: 5
+    },
+    {
+      name: "N'Guessan Christophe",
+      review: "Les chambres sont lumineuses, propres et ultra-confortables. Se réveiller et profiter de la piscine est un vrai plaisir.",
       rating: 5
     }
   ];
@@ -27,7 +42,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="border-gold/20 shadow-elegant hover:shadow-gold transition-all duration-300 transform hover:scale-105">
               <CardContent className="p-8">

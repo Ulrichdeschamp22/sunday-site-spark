@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone, Sparkles, Crown, Gem, MessageCircle } from "lucide-react";
+import { MapPin, Wifi, Tv, Coffee, Droplets, Star, Phone, Sparkles, Crown, Gem, MessageCircle, Heart, Gamepad2, Users } from "lucide-react";
 import chambresHero from "@/assets/chambres-hero.jpg";
 import { useState } from "react";
 import Header from "@/components/Header";
@@ -35,6 +35,22 @@ const Chambres = () => {
   const chambresData = {
     nuitée: [
       {
+        name: "🌟 PACKAGE CHAMBRE STANDARD COUPLE",
+        price: "55.000 - 70.000 FCFA",
+        features: [
+          "🚤 Transport aller-retour inclus",
+          "📺 Canal+ formule évasion",
+          "🍽️ Tous repas inclus (Déjeuner + Dîner + Petit-déj)",
+          "🏊 Piscine",
+          "🎯 Ludo + Baby-foot + Volley beach",
+          "🏹 Tir à l'arc + Canoë + Pétanque"
+        ],
+        description: "💖 OFFRE TOUT COMPRIS pour couple - 24h de bonheur (12h → 12h le lendemain)",
+        icon: Crown,
+        gradient: "from-gradient-start to-gradient-end",
+        special: true
+      },
+      {
         name: "Chambre Standard",
         price: "25.000 FCFA",
         features: [
@@ -43,7 +59,7 @@ const Chambres = () => {
           "Petit-Déjeuner inclus",
           "Accès à la Piscine"
         ],
-        description: "Parfaite pour un séjour confortable avec toutes les commodités essentielles.",
+        description: "Parfaite pour un séjour confortable (12h → 12h le lendemain)",
         icon: Star,
         gradient: "from-amber-400 to-orange-500"
       },
@@ -56,7 +72,7 @@ const Chambres = () => {
           "Petit-Déjeuner inclus",
           "Accès à la Piscine"
         ],
-        description: "Un niveau de confort supérieur avec plus de chaînes et d'espace.",
+        description: "Un niveau de confort supérieur (12h → 12h le lendemain)",
         icon: Sparkles,
         gradient: "from-blue-400 to-indigo-600"
       },
@@ -70,7 +86,7 @@ const Chambres = () => {
           "Accès à la Piscine",
           "Eau chaude"
         ],
-        description: "Le summum du luxe avec eau chaude et espace généreux.",
+        description: "Le summum du luxe (12h → 12h le lendemain)",
         icon: Crown,
         gradient: "from-purple-500 to-pink-600"
       }
@@ -162,7 +178,7 @@ const Chambres = () => {
           
           {selectedCategory === "nuitée" && (
             <div className="text-center mt-4">
-              <p className="text-muted-foreground">Entrée : 11 Heure — Sortie : 11 Heure</p>
+              <p className="text-muted-foreground">Entrée : 12h — Sortie : 12h le lendemain (24h)</p>
               <p className="text-gold font-semibold">💰 Réduction à partir de 3 jours de séjour !</p>
             </div>
           )}
@@ -184,9 +200,14 @@ const Chambres = () => {
               return (
                 <Card 
                   key={index} 
-                  className="overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-br from-background via-muted/10 to-background"
+                  className={`overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-br from-background via-muted/10 to-background ${room.special ? 'ring-4 ring-gold ring-opacity-50 scale-105' : ''}`}
                 >
                   <div className={`relative h-40 bg-gradient-to-br ${room.gradient} flex items-center justify-center`}>
+                    {room.special && (
+                      <div className="absolute top-2 left-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                        OFFRE SPÉCIALE
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-black/20" />
                     <Icon className="w-20 h-20 text-white relative z-10 drop-shadow-2xl" />
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-foreground px-4 py-2 rounded-full font-bold shadow-lg">
@@ -229,9 +250,9 @@ const Chambres = () => {
       {/* Additional Info */}
       <section className="py-16 bg-gradient-to-br from-navy to-navy-dark text-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Équipements & Services</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Services & Loisirs Disponibles</h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-12">
             <div className="flex flex-col items-center space-y-2">
               <Wifi className="w-12 h-12 text-gold" />
               <h3 className="font-semibold">WiFi Gratuit</h3>
@@ -254,6 +275,44 @@ const Chambres = () => {
               <Droplets className="w-12 h-12 text-gold" />
               <h3 className="font-semibold">Piscine</h3>
               <p className="text-sm text-white/80">Accès inclus</p>
+            </div>
+          </div>
+
+          <div className="border-t border-white/20 pt-12">
+            <h3 className="text-2xl font-bold text-center mb-8 text-gold">🎯 Activités & Loisirs Gratuits</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🏊</span>
+                <h4 className="font-semibold">Piscine</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🎲</span>
+                <h4 className="font-semibold">Ludo</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">⚽</span>
+                <h4 className="font-semibold">Baby-foot</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🏐</span>
+                <h4 className="font-semibold">Volley beach</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🏹</span>
+                <h4 className="font-semibold">Tir à l'arc</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🛶</span>
+                <h4 className="font-semibold">Canoë</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🎯</span>
+                <h4 className="font-semibold">Pétanque</h4>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <span className="text-3xl">🌴</span>
+                <h4 className="font-semibold">Jardins</h4>
+              </div>
             </div>
           </div>
         </div>

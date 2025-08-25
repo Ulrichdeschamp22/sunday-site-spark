@@ -140,30 +140,39 @@ Téléphone: ${data.telephone}`;
     const knowledgeBase = {
       // Informations sur les prix et chambres
       pricing: {
-        keywords: ['prix', 'tarif', 'cout', 'combien', 'montant', 'budget', 'cher', 'abordable', 'reduction', 'promo', 'offre'],
+        keywords: ['prix', 'tarif', 'cout', 'combien', 'montant', 'budget', 'cher', 'abordable', 'reduction', 'promo', 'offre', 'package'],
         chambres: {
+          packageCouple: {
+            nom: "PACKAGE CHAMBRE STANDARD COUPLE",
+            tarifs: "55.000 FCFA (via Yopougon/Azito) | 70.000 FCFA (via Biétry/Village)",
+            inclus: "Transport aller-retour, Canal+ évasion, Chambre climatisée, Tous repas (déjeuner + dîner + petit-déj), Toutes activités gratuites",
+            duree: "24h (12h → 12h le lendemain)"
+          },
           standard: {
-            nuitee: "25.000 FCFA (de 11h à 11h le lendemain)",
+            nuitee: "25.000 FCFA (de 12h à 12h le lendemain)",
             journee: "15.000 FCFA (lundi au jeudi de 10h à 17h)",
             inclus: "Canal+ formule accès, Climatisation, Petit-Déjeuner, Accès Piscine"
           },
           standardPlus: {
-            nuitee: "30.000 FCFA (de 11h à 11h le lendemain)",
+            nuitee: "30.000 FCFA (de 12h à 12h le lendemain)",
             journee: "20.000 FCFA (lundi au jeudi de 10h à 17h)",
             inclus: "Canal+ formule évasion, Climatisation, Petit-Déjeuner, Accès Piscine"
           },
           suiteJunior: {
-            nuitee: "40.000 FCFA (de 11h à 11h le lendemain)",
+            nuitee: "40.000 FCFA (de 12h à 12h le lendemain)",
             journee: "25.000 FCFA (lundi au jeudi de 10h à 17h)",
             inclus: "Canal+ formule évasion, Climatisation, Petit-Déjeuner, Accès Piscine, Eau chaude"
           }
         },
         response: () => {
           return `🏷️ Nos Tarifs Chambres (Excellent rapport qualité-prix!)\n\n` +
+            `🌟 PACKAGE CHAMBRE STANDARD COUPLE (TOUT COMPRIS):\n` +
+            `💑 55.000 FCFA (via Yopougon) | 70.000 FCFA (via Biétry)\n` +
+            `✅ Transport aller-retour + Tous repas + Toutes activités\n\n` +
             `📌 Chambre Standard: 25.000 FCFA/nuit | 15.000 FCFA/journée\n` +
             `📌 Chambre Standard Plus: 30.000 FCFA/nuit | 20.000 FCFA/journée\n` +
             `📌 Suite Junior: 40.000 FCFA/nuit | 25.000 FCFA/journée\n\n` +
-            `✨ Toutes incluent: Petit-déjeuner, Accès piscine, Canal+ et Climatisation\n` +
+            `✨ Horaires nuitée: 12h → 12h le lendemain (24h)\n` +
             `🎁 RÉDUCTION à partir de 3 jours de séjour!\n\n` +
             `📞 Réservez: +225 07 69 69 21 94 (WhatsApp disponible)`;
         }
@@ -229,12 +238,13 @@ Téléphone: ${data.telephone}`;
       
       // Services et loisirs
       services: {
-        keywords: ['service', 'equipement', 'parking', 'piscine', 'activite', 'loisir', 'detente', 'sport', 'jeu', 'animation', 'navette', 'taxi', 'blanchisserie', 'excursion'],
-        response: () => "🌟 Services & Équipements Premium:\n\n" +
-          "🏊 Loisirs:\n• Piscine extérieure\n• Baby-foot\n• Balançoires\n• Tir à l'arc\n• Terrasses et jardins privatifs\n\n" +
+        keywords: ['service', 'equipement', 'parking', 'piscine', 'activite', 'loisir', 'detente', 'sport', 'jeu', 'animation', 'navette', 'taxi', 'blanchisserie', 'excursion', 'ludo', 'babyfoot', 'baby-foot', 'volley', 'arc', 'canoe', 'petanque'],
+        response: () => "🌟 Services & Loisirs Disponibles:\n\n" +
+          "🎯 Activités GRATUITES:\n• Piscine\n• Ludo\n• Baby-foot\n• Volley beach\n• Tir à l'arc\n• Canoë\n• Pétanque\n\n" +
           "🚗 Services Pratiques:\n• Parking privé sécurisé gratuit\n• Service navette/taxi sur demande\n• Réception 24h/24\n• Service de blanchisserie\n• Wi-Fi haut débit gratuit\n\n" +
           "💼 Business:\n• Espaces de coworking\n• Organisation d'événements\n\n" +
-          "🌴 Organisation d'excursions locales sur demande"
+          "🌴 Organisation d'excursions locales sur demande\n\n" +
+          "Toutes ces activités sont incluses dans votre séjour!"
       },
       
       // Paiements
@@ -252,8 +262,8 @@ Téléphone: ${data.telephone}`;
         keywords: ['horaire', 'ouvert', 'ferme', 'heure', 'check in', 'check out', 'arrivee', 'depart'],
         response: () => "⏰ Horaires & Disponibilité:\n\n" +
           "🏨 Hôtel ouvert 24h/24 et 7j/7\n" +
-          "✅ Check-in: À partir de 11h\n" +
-          "✅ Check-out: Avant 11h le lendemain\n\n" +
+          "✅ Check-in: À partir de 12h\n" +
+          "✅ Check-out: 12h le lendemain (24h de séjour)\n\n" +
           "📞 Réception disponible 24h/24\n" +
           "🚤 Dernier bateau/pinasse: 18h30"
       },
@@ -283,6 +293,7 @@ Téléphone: ${data.telephone}`;
           "💬 Keti Mia: \"Très bel accueil, cadre au top ! Rapport qualité prix excellent ! Très très satisfaite.\"\n\n" +
           "💬 Brice-Roland Kouassi: \"Cadre doux et paisible parfait pour un retour à la nature. Véritable voyage culinaire, accueil chaleureux, on se sent en famille et en sécurité.\"\n\n" +
           "💬 Kouadio Serge: \"Les chambres sont spacieuses, modernes et incroyablement confortables. Se détendre au bord de la piscine est un vrai bonheur !\"\n\n" +
+          "💬 Kouassi Didier: \"Le confort des chambres et la qualité des services rendent le séjour vraiment agréable. La piscine est un vrai plus pour se relaxer.\"\n\n" +
           "💬 N'Guessan Christophe: \"Chambres lumineuses, propres et ultra-confortables. Se réveiller et profiter de la piscine est un vrai plaisir.\"\n\n" +
           "🌟 Rejoignez nos clients satisfaits!"
       },
@@ -379,6 +390,28 @@ Téléphone: ${data.telephone}`;
     if (lowerQuestion.match(/^(bonjour|salut|bonsoir|hello|hi|hey|coucou)/)) {
       return "👋 Bonjour et bienvenue à l'Hôtel Résidence Sunday ! 🌟\n\nJe suis votre assistant virtuel disponible 24h/24. Comment puis-je vous aider aujourd'hui ?\n\n" +
         "Vous pouvez me poser des questions sur:\n• Nos chambres et tarifs\n• Les réservations\n• Notre restaurant\n• Les services et activités\n• Comment nous rejoindre\n\nN'hésitez pas, je suis là pour vous! 😊";
+    }
+
+    // Questions sur le package couple
+    if (lowerQuestion.includes('package') || lowerQuestion.includes('couple') || lowerQuestion.includes('tout compris')) {
+      return "🌟 PACKAGE CHAMBRE STANDARD COUPLE (Offre TOUT COMPRIS):\n\n" +
+        "💑 Pour couple uniquement - 24h de bonheur total!\n\n" +
+        "✅ INCLUS dans le package:\n" +
+        "• Transport aller-retour\n" +
+        "• Canal+ formule évasion\n" +
+        "• Chambre climatisée\n" +
+        "• Déjeuner (pour le couple)\n" +
+        "• Dîner (pour le couple)\n" +
+        "• Petit déjeuner (pour le couple)\n\n" +
+        "🎯 Activités GRATUITES illimitées:\n" +
+        "• Piscine • Ludo • Baby-foot\n" +
+        "• Volley beach • Tir à l'arc\n" +
+        "• Canoë • Pétanque\n\n" +
+        "💰 TARIFS:\n" +
+        "• 55.000 FCFA (via Yopougon/Azito)\n" +
+        "• 70.000 FCFA (via Biétry/Village)\n\n" +
+        "⏰ Durée: 12h → 12h le lendemain (24h)\n\n" +
+        "📞 Réservez vite: +225 07 69 69 21 94";
     }
     
     if (lowerQuestion.includes('merci') || lowerQuestion.includes('thank')) {
