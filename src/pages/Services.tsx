@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { 
   Wifi, 
   Car, 
@@ -16,7 +17,13 @@ import {
   Calendar,
   Gift,
   Dumbbell,
-  Phone
+  Phone,
+  Waves,
+  Palmtree,
+  Check,
+  Timer,
+  MapPinned,
+  Activity
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -166,6 +173,155 @@ const Services = () => {
                 </div>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Package Détente Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-blue-100/30 to-cyan-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 px-4 py-2 text-sm animate-pulse">
+                OFFRE SPÉCIALE
+              </Badge>
+              <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-navy via-blue-700 to-cyan-700 bg-clip-text text-transparent">
+                PACKAGE DÉTENTE
+              </h2>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Waves className="w-6 h-6 text-blue-500" />
+                <p className="text-2xl font-semibold text-navy">Baie des Milliardaires</p>
+                <Palmtree className="w-6 h-6 text-green-500" />
+              </div>
+              <p className="text-4xl font-bold text-gold animate-scale-in">
+                12 000 FCFA / PERSONNE
+              </p>
+              <p className="text-lg text-muted-foreground mt-2">
+                Île Boulay - Disponible tous les jours
+              </p>
+            </div>
+
+            {/* Main Content Card */}
+            <Card className="overflow-hidden shadow-2xl border-0">
+              <div className="bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 p-6">
+                <h3 className="text-2xl font-bold text-white text-center">
+                  Une journée de détente complète à la Baie des Milliardaires
+                </h3>
+              </div>
+
+              <div className="p-8 space-y-8">
+                {/* Ce que comprend le package */}
+                <div>
+                  <h4 className="text-xl font-bold text-navy mb-4 flex items-center">
+                    <Gift className="w-6 h-6 mr-2 text-gold" />
+                    Ce que comprend le package
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start space-x-3">
+                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-semibold text-navy">Transport sécurisé</p>
+                        <p className="text-sm text-muted-foreground">Aller-retour en pinasse sécurisée</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-semibold text-navy">Repas complet</p>
+                        <p className="text-sm text-muted-foreground">½ poulet ou ½ poisson + 2 accompagnements</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-semibold text-navy">Boissons incluses</p>
+                        <p className="text-sm text-muted-foreground">Boisson au choix + eau 0,5L</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                      <div>
+                        <p className="font-semibold text-navy">Dessert</p>
+                        <p className="text-sm text-muted-foreground">Jus naturel ou glace</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Activités gratuites */}
+                <div>
+                  <h4 className="text-xl font-bold text-navy mb-4 flex items-center">
+                    <Activity className="w-6 h-6 mr-2 text-gold" />
+                    Activités gratuites incluses
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {["Piscine", "Baby-foot", "Canoë", "Volley Beach", "Dame", "Ludo", "Cartes", "Pétanque"].map((activity) => (
+                      <div key={activity} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-3 text-center">
+                        <p className="font-medium text-navy">{activity}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Horaires et Point de départ */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-xl font-bold text-navy mb-4 flex items-center">
+                      <Timer className="w-6 h-6 mr-2 text-gold" />
+                      Horaires
+                    </h4>
+                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4">
+                      <p className="font-semibold text-navy mb-2">Départs :</p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {["9h", "10h", "11h", "12h"].map((time) => (
+                          <Badge key={time} variant="secondary" className="bg-white">
+                            {time}
+                          </Badge>
+                        ))}
+                      </div>
+                      <p className="font-semibold text-navy">Retour : 17h</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold text-navy mb-4 flex items-center">
+                      <MapPinned className="w-6 h-6 mr-2 text-gold" />
+                      Point de départ
+                    </h4>
+                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4">
+                      <p className="font-semibold text-navy mb-2">Yopougon Azito</p>
+                      <p className="text-sm text-muted-foreground">
+                        Point de rassemblement : Azito village, non loin du foyer des jeunes
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Conditions spéciales */}
+                <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-4">
+                  <p className="text-sm font-medium text-amber-900">
+                    ⚠️ Condition spéciale : Droit de bouchon de 1000 F par bouteille sur toutes les boissons alcoolisées ramenées
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="text-center pt-4">
+                  <a href="tel:+22507696921994">
+                    <Button 
+                      size="lg" 
+                      className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-xl transform hover:scale-105 transition-all duration-300"
+                    >
+                      <Phone className="w-5 h-5 mr-2" />
+                      Réserver maintenant : 07 69 69 21 94
+                    </Button>
+                  </a>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Offre valable uniquement depuis Yopougon Azito
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>

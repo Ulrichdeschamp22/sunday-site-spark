@@ -129,6 +129,28 @@ Téléphone: ${data.telephone}`;
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, ""); // Normaliser pour gérer les accents
     
+    // Package Détente - Vérifier en premier
+    if (lowerQuestion.includes('package detente') || lowerQuestion.includes('excursion') || 
+        lowerQuestion.includes('baie') || lowerQuestion.includes('milliardaire') ||
+        lowerQuestion.includes('12000') || lowerQuestion.includes('12 000')) {
+      return "🌴 **PACKAGE DÉTENTE - BAIE DES MILLIARDAIRES** 🌴\n\n" +
+        "💰 **Prix : 12 000 FCFA/personne**\n" +
+        "📅 Disponible tous les jours\n" +
+        "📍 Île Boulay (Baie des Milliardaires)\n\n" +
+        "**✅ Ce que comprend le package :**\n" +
+        "• Transport aller-retour en pinasse sécurisée\n" +
+        "• Repas : ½ poulet OU ½ poisson + 2 accompagnements (alloco, frites, attiéké)\n" +
+        "• Boisson au choix + eau 0,5L\n" +
+        "• Dessert (jus ou glace)\n\n" +
+        "**🎮 Activités gratuites incluses :**\n" +
+        "Piscine, Baby-foot, Canoë, Volley Beach, Jeux de société, Pétanque\n\n" +
+        "**⏰ Horaires :**\n" +
+        "• Départs : 9h, 10h, 11h, 12h\n" +
+        "• Retour : 17h\n\n" +
+        "**📍 Point de départ :** Yopougon Azito village\n\n" +
+        "📞 **Réservation : 07 69 69 21 94**";
+    }
+    
     // Vérifier si l'utilisateur veut faire une réservation
     if (lowerQuestion.includes('reservation') || lowerQuestion.includes('reserver') || 
         lowerQuestion.includes('je veux reserver') || lowerQuestion.includes('passer une reservation')) {
@@ -244,13 +266,17 @@ Téléphone: ${data.telephone}`;
       
       // Services et loisirs
       services: {
-        keywords: ['service', 'equipement', 'parking', 'piscine', 'activite', 'loisir', 'detente', 'sport', 'jeu', 'animation', 'navette', 'taxi', 'blanchisserie', 'excursion', 'ludo', 'babyfoot', 'baby-foot', 'volley', 'arc', 'canoe', 'petanque'],
+        keywords: ['service', 'equipement', 'parking', 'piscine', 'activite', 'loisir', 'detente', 'sport', 'jeu', 'animation', 'navette', 'taxi', 'blanchisserie', 'excursion', 'ludo', 'babyfoot', 'baby-foot', 'volley', 'arc', 'canoe', 'petanque', 'package detente', 'baie', 'milliardaire'],
         response: () => "🌟 Services & Loisirs Disponibles:\n\n" +
-          "🎯 Activités GRATUITES:\n• Piscine\n• Ludo\n• Baby-foot\n• Volley beach\n• Tir à l'arc\n• Canoë\n• Pétanque\n\n" +
+          "🎯 Activités GRATUITES à l'hôtel:\n• Piscine\n• Ludo\n• Baby-foot\n• Volley beach\n• Tir à l'arc\n• Canoë\n• Pétanque\n\n" +
+          "🌴 **PACKAGE DÉTENTE SPÉCIAL (12 000 F/personne):**\n" +
+          "Journée complète à la Baie des Milliardaires incluant:\n" +
+          "• Transport aller-retour en pinasse\n" +
+          "• Repas complet avec boissons\n" +
+          "• Toutes les activités\n\n" +
           "🚗 Services Pratiques:\n• Parking privé sécurisé gratuit\n• Service navette/taxi sur demande\n• Réception 24h/24\n• Service de blanchisserie\n• Wi-Fi haut débit gratuit\n\n" +
           "💼 Business:\n• Espaces de coworking\n• Organisation d'événements\n\n" +
-          "🌴 Organisation d'excursions locales sur demande\n\n" +
-          "Toutes ces activités sont incluses dans votre séjour!"
+          "📞 Infos et réservations: 07 69 69 21 94"
       },
       
       // Paiements
