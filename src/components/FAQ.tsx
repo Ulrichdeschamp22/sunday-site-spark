@@ -206,28 +206,6 @@ const FAQ = () => {
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-          {faqCategories.map((category, categoryIndex) => (
-            <Card 
-              key={categoryIndex}
-              className={`group cursor-pointer border-2 border-transparent hover:border-gold/30 transition-all duration-500 animate-scale-in bg-gradient-to-br ${category.color} p-1`}
-              style={{ animationDelay: `${categoryIndex * 100}ms` }}
-            >
-              <div className="bg-card rounded-lg p-6 h-full">
-                <div className="flex flex-col items-center text-center space-y-3">
-                  <div className="p-3 rounded-full bg-gradient-to-br from-gold/20 to-gold/10 group-hover:scale-110 transition-transform">
-                    {category.icon}
-                  </div>
-                  <h3 className="font-bold text-lg">{category.title}</h3>
-                  <Badge variant="secondary" className="text-xs">
-                    {category.questions.length} questions
-                  </Badge>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
 
         {/* FAQ Sections */}
         <div className="space-y-12">
