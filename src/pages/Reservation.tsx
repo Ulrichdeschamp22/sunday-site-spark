@@ -281,16 +281,17 @@ const Reservation = () => {
                     Envoyer la réservation via WhatsApp
                   </Button>
                   
-                  <Button 
-                    type="button"
-                    variant="outline" 
-                    size="lg"
-                    onClick={() => window.location.href = 'tel:+2250769692194'}
-                    className="flex-1"
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    Appeler la réception
-                  </Button>
+                  <a href="tel:+2250769692194" className="flex-1">
+                    <Button 
+                      type="button"
+                      variant="outline" 
+                      size="lg"
+                      className="w-full"
+                    >
+                      <Phone className="w-5 h-5 mr-2" />
+                      Appeler la réception
+                    </Button>
+                  </a>
                 </div>
               </form>
             </Card>

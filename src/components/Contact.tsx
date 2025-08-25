@@ -14,7 +14,7 @@ const Contact = () => {
       icon: Phone,
       title: "Téléphone",
       content: "+225 07 69 69 21 94",
-      action: () => window.location.href = 'tel:+2250769692194'
+      action: () => document.querySelector<HTMLAnchorElement>('#phone-link')?.click()
     },
     {
       icon: Clock,
@@ -83,15 +83,16 @@ const Contact = () => {
               <MessageCircle className="w-5 h-5" />
               Réserver via WhatsApp
             </Button>
-            <Button 
-              variant="gold" 
-              size="lg" 
-              className="text-lg px-8 py-4"
-              onClick={() => window.location.href = 'tel:+2250769692194'}
-            >
-              <Phone className="w-5 h-5" />
-              Appeler maintenant
-            </Button>
+            <a href="tel:+2250769692194" id="phone-link">
+              <Button 
+                variant="gold" 
+                size="lg" 
+                className="text-lg px-8 py-4"
+              >
+                <Phone className="w-5 h-5" />
+                Appeler maintenant
+              </Button>
+            </a>
           </div>
         </div>
 

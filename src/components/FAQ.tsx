@@ -320,7 +320,7 @@ const FAQ = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
-                href="tel:+22507696921994" 
+                href="tel:+2250769692194" 
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gold to-gold/80 text-navy font-bold rounded-full hover:scale-105 transition-transform shadow-lg"
               >
                 📞 +225 07 69 69 21 94

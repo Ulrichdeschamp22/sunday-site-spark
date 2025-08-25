@@ -24,7 +24,6 @@ const Chambres = () => {
   };
 
   const handleCallHotel = () => {
-    window.location.href = 'tel:+2250769692194';
     setIsDialogOpen(false);
   };
 
@@ -278,15 +277,17 @@ const Chambres = () => {
           </AlertDialogHeader>
           
           <div className="flex flex-col gap-4 mt-6">
-            <Button
-              variant="gold"
-              size="lg"
-              onClick={handleCallHotel}
-              className="flex items-center justify-center gap-3 py-6"
-            >
-              <Phone className="w-5 h-5" />
-              <span className="font-semibold">Appeler l'hôtel</span>
-            </Button>
+            <a href="tel:+2250769692194" className="w-full">
+              <Button
+                variant="gold"
+                size="lg"
+                onClick={handleCallHotel}
+                className="flex items-center justify-center gap-3 py-6 w-full"
+              >
+                <Phone className="w-5 h-5" />
+                <span className="font-semibold">Appeler l'hôtel</span>
+              </Button>
+            </a>
             
             <Button
               className="flex items-center justify-center gap-3 py-6 bg-green-500 hover:bg-green-600 text-white"

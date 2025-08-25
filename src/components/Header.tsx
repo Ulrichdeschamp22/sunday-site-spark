@@ -56,14 +56,18 @@ const Header = () => {
             >
               Réserver
             </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => window.location.href = 'tel:+2250769692194'}
-            >
-              <Phone className="w-4 h-4" />
-              Appeler
-            </Button>
+            <a href="tel:+2250769692194">
+              <Button 
+                variant="outline" 
+                size="sm"
+                asChild
+              >
+                <span>
+                  <Phone className="w-4 h-4" />
+                  Appeler
+                </span>
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -107,14 +111,18 @@ const Header = () => {
                 >
                   Réserver
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => window.location.href = 'tel:+2250769692194'}
-                >
-                  <Phone className="w-4 h-4" />
-                  Appeler
-                </Button>
+                <a href="tel:+2250769692194">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    asChild
+                  >
+                    <span>
+                      <Phone className="w-4 h-4" />
+                      Appeler
+                    </span>
+                  </Button>
+                </a>
               </div>
             </nav>
           </div>
