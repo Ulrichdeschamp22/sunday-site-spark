@@ -24,6 +24,17 @@ const ChatBot = () => {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showQuickReplies, setShowQuickReplies] = useState(true);
+  const [collectingReservation, setCollectingReservation] = useState(false);
+  const [reservationStep, setReservationStep] = useState(0);
+  const [reservationData, setReservationData] = useState({
+    nom: '',
+    prenom: '',
+    heureArrivee: '',
+    dateArrivee: '',
+    dateDepart: '',
+    nombreJours: '',
+    telephone: ''
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Questions rapides basées sur la FAQ
@@ -48,11 +59,82 @@ const ChatBot = () => {
 
   const [lastUserMessage, setLastUserMessage] = useState<string>("");
   
+  const processReservation = (userResponse: string) => {
+    const reservationSteps = [
+      { field: 'nom', question: "Quel est votre nom de famille ?" },
+      { field: 'prenom', question: "Quel est votre prénom ?" },
+      { field: 'dateArrivee', question: "Quelle est votre date d'arrivée ? (format: JJ/MM/AAAA)" },
+      { field: 'heureArrivee', question: "À quelle heure arriverez-vous ?" },
+      { field: 'dateDepart', question: "Quelle est votre date de départ ? (format: JJ/MM/AAAA)" },
+      { field: 'nombreJours', question: "Combien de jours resterez-vous ?" },
+      { field: 'telephone', question: "Quel est votre numéro de téléphone ?" }
+    ];
+
+    // Sauvegarder la réponse actuelle
+    const currentStep = reservationSteps[reservationStep];
+    if (currentStep && reservationStep > 0) {
+      setReservationData(prev => ({
+        ...prev,
+        [currentStep.field]: userResponse
+      }));
+    }
+
+    // Passer à l'étape suivante
+    const nextStep = reservationStep + 1;
+    setReservationStep(nextStep);
+
+    if (nextStep < reservationSteps.length) {
+      return reservationSteps[nextStep].question;
+    } else {
+      // Toutes les informations sont collectées, envoyer sur WhatsApp
+      const data = { ...reservationData, [currentStep.field]: userResponse };
+      const message = `Nouvelle réservation:
+Nom: ${data.nom}
+Prénom: ${data.prenom}
+Date d'arrivée: ${data.dateArrivee}
+Heure d'arrivée: ${data.heureArrivee}
+Date de départ: ${data.dateDepart}
+Nombre de jours: ${data.nombreJours}
+Téléphone: ${data.telephone}`;
+
+      const whatsappUrl = `https://wa.me/2250769692194?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+
+      // Réinitialiser la réservation
+      setCollectingReservation(false);
+      setReservationStep(0);
+      setReservationData({
+        nom: '',
+        prenom: '',
+        heureArrivee: '',
+        dateArrivee: '',
+        dateDepart: '',
+        nombreJours: '',
+        telephone: ''
+      });
+
+      return "✅ Parfait ! J'ai envoyé votre demande de réservation sur WhatsApp. Notre équipe vous contactera très rapidement pour confirmer votre réservation.\n\n📞 Vous pouvez aussi nous appeler directement au +225 07 69 69 21 94";
+    }
+  };
+
   const getKnowledgeBaseResponse = (question: string): string => {
     setLastUserMessage(question);
     const lowerQuestion = question.toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, ""); // Normaliser pour gérer les accents
+    
+    // Vérifier si l'utilisateur veut faire une réservation
+    if (lowerQuestion.includes('reservation') || lowerQuestion.includes('reserver') || 
+        lowerQuestion.includes('je veux reserver') || lowerQuestion.includes('passer une reservation')) {
+      setCollectingReservation(true);
+      setReservationStep(0);
+      return "Je vais vous aider à passer une réservation. Je vais collecter vos informations étape par étape.\n\nQuel est votre nom de famille ?";
+    }
+
+    // Si on est en train de collecter les infos de réservation
+    if (collectingReservation) {
+      return processReservation(question);
+    }
     
     // Base de connaissances complète avec toutes les informations de l'hôtel
     const knowledgeBase = {
@@ -236,31 +318,58 @@ const ChatBot = () => {
       }
     };
     
-    // Fonction pour trouver la meilleure correspondance
+    // Fonction améliorée pour trouver la meilleure correspondance
     const findBestMatch = () => {
       let bestMatch = null;
       let maxScore = 0;
+      let partialMatches = [];
+      
+      // Diviser la question en mots individuels pour une recherche plus flexible
+      const questionWords = lowerQuestion.split(/\s+/);
       
       for (const [key, category] of Object.entries(knowledgeBase)) {
         const keywords = category.keywords;
         let score = 0;
+        let matchedKeywords = [];
         
+        // Vérifier chaque mot clé
         for (const keyword of keywords) {
           if (lowerQuestion.includes(keyword)) {
-            // Donner plus de poids aux mots exacts
             score += keyword.split(' ').length > 1 ? 3 : 2;
+            matchedKeywords.push(keyword);
             
-            // Bonus si le mot est au début de la question
             if (lowerQuestion.startsWith(keyword)) {
               score += 2;
             }
           }
         }
         
+        // Vérifier chaque mot de la question individuellement
+        for (const word of questionWords) {
+          if (word.length > 2) { // Ignorer les mots très courts
+            for (const keyword of keywords) {
+              if (keyword.includes(word) && !matchedKeywords.includes(keyword)) {
+                score += 1; // Score plus faible pour les correspondances partielles
+                matchedKeywords.push(keyword);
+              }
+            }
+          }
+        }
+        
+        if (score > 0) {
+          partialMatches.push({ category, score, matchedKeywords });
+        }
+        
         if (score > maxScore) {
           maxScore = score;
           bestMatch = category;
         }
+      }
+      
+      // Si aucune correspondance parfaite mais des correspondances partielles
+      if (!bestMatch && partialMatches.length > 0) {
+        partialMatches.sort((a, b) => b.score - a.score);
+        bestMatch = partialMatches[0].category;
       }
       
       return bestMatch;
@@ -305,18 +414,12 @@ const ChatBot = () => {
         "Votre sécurité et votre confort sont nos priorités!";
     }
     
-    // Réponse par défaut enrichie
-    return "💬 Je suis l'assistant virtuel de l'Hôtel Résidence Sunday, disponible 24h/24 pour répondre à toutes vos questions!\n\n" +
-      "Voici ce que je peux vous dire sur:\n" +
-      "🏨 Nos chambres et tarifs\n" +
-      "📅 Les réservations\n" +
-      "🍽️ Notre restaurant et menu\n" +
-      "🏊 Nos services et activités\n" +
-      "📍 Comment nous rejoindre\n" +
-      "💳 Les moyens de paiement\n" +
-      "🎉 L'organisation d'événements\n\n" +
-      "Posez-moi votre question plus précisément et je vous donnerai tous les détails!\n\n" +
-      "Exemples: \"Quels sont vos tarifs?\", \"Comment réserver?\", \"Avez-vous une piscine?\"";
+    // Réponse par défaut - Si aucune correspondance trouvée, donner le numéro de l'hôtel
+    return "Je n'ai pas trouvé de réponse précise à votre question dans ma base de connaissances.\n\n" +
+      "Pour obtenir une réponse personnalisée et détaillée, je vous invite à contacter directement notre équipe:\n\n" +
+      "📞 Téléphone & WhatsApp: +225 07 69 69 21 94\n" +
+      "⏰ Disponible 24h/24 et 7j/7\n\n" +
+      "Notre équipe se fera un plaisir de répondre à toutes vos questions spécifiques!";
   };
 
   const handleSend = (text?: string) => {
