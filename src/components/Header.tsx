@@ -60,12 +60,9 @@ const Header = () => {
               <Button 
                 variant="outline" 
                 size="sm"
-                asChild
               >
-                <span>
-                  <Phone className="w-4 h-4" />
-                  Appeler
-                </span>
+                <Phone className="w-4 h-4" />
+                <span className="hidden lg:inline ml-1">Appeler</span>
               </Button>
             </a>
           </div>
@@ -111,16 +108,14 @@ const Header = () => {
                 >
                   Réserver
                 </Button>
-                <a href="tel:+2250769692194">
+                <a href="tel:+2250769692194" className="w-full">
                   <Button 
                     variant="outline" 
                     size="sm"
-                    asChild
+                    className="w-full"
                   >
-                    <span>
-                      <Phone className="w-4 h-4" />
-                      Appeler
-                    </span>
+                    <Phone className="w-4 h-4" />
+                    <span className="ml-1">Appeler</span>
                   </Button>
                 </a>
               </div>
